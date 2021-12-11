@@ -4,7 +4,7 @@
 
 # Date: December 11, 2021
 
-# Last modified: December 11, 2021 3:12 pm by Catharine
+# Last modified: December 11, 2021 4:18 pm by Catharine
 
 # Name: Python Project (Wildlife Survival Guide)
 
@@ -17,6 +17,7 @@ import pygame
 pygame.init() # Initialize pygame
 import platform
 import os, time
+from pygame import mixer
 
 # Necessary for python to work on tdsb computers
 if platform.system() == "Windows":
@@ -56,6 +57,10 @@ icon = pygame.image.load('icon.png')
 gameDisplay = pygame.display.set_mode((displayWidth, displayHeight))
 pygame.display.set_caption('Wildlife Survival Guide') # Sets caption at top to Wildlife Survival Guide
 pygame.display.set_icon(icon) # Sets icon
+
+# Background music
+mixer.music.load('DynamiteInstrumental.mp3')
+mixer.music.play(-1) # -1 is to keep the music looping 
 
 clock = pygame.time.Clock()
 
