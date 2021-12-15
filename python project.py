@@ -4,7 +4,7 @@
 
 # Date: December 11, 2021
 
-# Last modified: December 13, 2021 9:39 pm by Catharine
+# Last modified: December 14, 2021 9:01 pm by Catharine
 
 # Name: Python Project (Wildlife Survival Guide)
 
@@ -48,6 +48,12 @@ def gameLoop():
     gameExit = False
     show = "Welcome"
     
+    gameDisplay = pygame.display.set_mode((displayWidth, displayHeight)) # Sets display size
+    pygame.display.set_caption('Wildlife Survival Guide') # Sets caption at top to Wildlife Survival Guide
+    pygame.display.set_icon(icon) # Sets icon   
+    
+    pygame.display.update
+    
     if show == "Welcome":
         gameDisplay.fill((0, 0, 0)) # Set background as black 
         gameDisplay.blit(homeScreenBg, (0, 0)) # Sets background image
@@ -68,13 +74,39 @@ def gameLoop():
         
         clock.tick(60)
     
-    if show == "Animation":
+    elif show == "Animation":
         gameDisplay.fill((0, 0, 0)) # Set background as black 
-        gameDisplay.blit(storyBg, (0, 0)) # Sets background image
                               
         pygame.display.update()   
         
         clock.tick(60)
+        
+    elif show == "Instructions":
+        gameDisplay.fill((0, 0, 0)) # Set background as black 
+    
+        pygame.display.update()   
+    
+        clock.tick(60)        
+
+    elif show == "Lesson":
+        gameDisplay.fill((0, 0, 0)) # Set background as black 
+    
+        pygame.display.update()   
+    
+        clock.tick(60)        
+    
+    elif show == "Quiz":
+        gameDisplay.fill((0, 0, 0)) # Set background as black 
+    
+        pygame.display.update()   
+    
+        clock.tick(60)   
+    elif show == "Quiz Results":
+        gameDisplay.fill((0, 0, 0)) # Set background as black 
+    
+        pygame.display.update()   
+    
+        clock.tick(60)         
     
     while not gameExit:
         for ev in pygame.event.get():
@@ -91,17 +123,31 @@ def gameLoop():
                 if x >= 43 and x <= 271:
                     if y >= 264 and y <= 336:
                         if clicked[0] == 1:
-                            show = "Animation" # This button changes show from 'Welcome' to 'Animation'               
-            
+                            show = "Animation" # This button changes show from 'Welcome' to 'Animation'
+                    elif y >= 378 and y <= 449:
+                        if clicked[0] == 1:
+                            show = "Quiz" # This button changes show from 'Welcome' to 'Quiz'                    
+                elif x >= 286 and x <= 513:
+                    if y >= 264 and y <= 336:
+                        if clicked[0] == 1:
+                            show = "Instructions" # This button changes show from 'Welcome' to 'Instructions'
+                    elif y >= 378 and y <= 449:
+                        if clicked[0] == 1:
+                            show = "Quiz Results" # This button changes show from 'Welcome' to 'Quiz Results'                            
+                elif x >= 529 and x <= 756:
+                    if y >= 264 and y <= 336:
+                        if clicked[0] == 1:
+                            show = "Lesson" # This button changes show from 'Welcome' to 'Lesson'   
+                    elif y >= 378 and y <= 449:
+                        if clicked[0] == 1:
+                            pygame.quit() # This button allows the user the exit the program
+                            quit()
+        
             # Exits the game
             if event == pygame.quit:
                 pygame.quit()
                 quit()                
             
 # Main program
-# Display screen
-gameDisplay = pygame.display.set_mode((displayWidth, displayHeight))
-pygame.display.set_caption('Wildlife Survival Guide') # Sets caption at top to Wildlife Survival Guide
-pygame.display.set_icon(icon) # Sets icon
-
-gameLoop() # Start the game loop
+# Start game loop
+gameLoop()
