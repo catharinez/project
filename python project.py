@@ -4,7 +4,7 @@
 
 # Date: December 11, 2021
 
-# Last modified: December 14, 2021 9:01 pm by Catharine
+# Last modified: December 14, 2021 9:33 pm by Catharine
 
 # Name: Python Project (Wildlife Survival Guide)
 
@@ -18,6 +18,7 @@ pygame.init() # Initialize pygame
 import platform
 import os, time
 from pygame import mixer
+from pygame.locals import *
 
 # Declare and initialize variables
 displayWidth = int(800)
@@ -25,6 +26,7 @@ displayHeight = int(600)
 gameExit = bool()
 clock = pygame.time.Clock()
 homeScreenBg = pygame.image.load('images/WildlifeSurvivalBg.png')
+animationBg = pygame.image.load('images/animationscenariobg.png')
 icon = pygame.image.load('images/icon.png')
 storyButton = pygame.image.load('images/interactivestorybutton.png')
 storyButton = pygame.transform.scale(storyButton, (227, 71))
@@ -47,12 +49,13 @@ if platform.system() == "Windows":
 def gameLoop():
     gameExit = False
     show = "Welcome"
+    print("loop")
     
     gameDisplay = pygame.display.set_mode((displayWidth, displayHeight)) # Sets display size
     pygame.display.set_caption('Wildlife Survival Guide') # Sets caption at top to Wildlife Survival Guide
     pygame.display.set_icon(icon) # Sets icon   
     
-    pygame.display.update
+    pygame.display.update()
     
     if show == "Welcome":
         gameDisplay.fill((0, 0, 0)) # Set background as black 
@@ -76,6 +79,7 @@ def gameLoop():
     
     elif show == "Animation":
         gameDisplay.fill((0, 0, 0)) # Set background as black 
+        gameDisplay.blit(animationBg, (0, 0)) # Sets background image
                               
         pygame.display.update()   
         
@@ -123,7 +127,11 @@ def gameLoop():
                 if x >= 43 and x <= 271:
                     if y >= 264 and y <= 336:
                         if clicked[0] == 1:
-                            show = "Animation" # This button changes show from 'Welcome' to 'Animation'
+                            gameDisplay.fill((0, 0, 0))
+                            gameDisplay.blit(animationBg, (0, 0)) # Sets background image
+                            pygame.display.update()
+                            show = "Animation"
+                            break
                     elif y >= 378 and y <= 449:
                         if clicked[0] == 1:
                             show = "Quiz" # This button changes show from 'Welcome' to 'Quiz'                    
