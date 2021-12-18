@@ -4,7 +4,7 @@
 
 # Date: December 11, 2021
 
-# Last modified: December 16, 2021 10:02 pm by Catharine
+# Last modified: December 17, 2021 9:52 pm by Catharine
 
 # Name: Python Project (Wildlife Survival Guide)
 
@@ -25,6 +25,7 @@ gameExit = bool()
 clock = pygame.time.Clock()
 homeScreenBg = pygame.image.load('images/WildlifeSurvivalBg.png')
 animationBg = pygame.image.load('images/animationscenariobg.png')
+animation1Bg = pygame.image.load('images/animation1bg.png')
 lesson1Bg = pygame.image.load('images/lesson1.png')
 lesson2Bg = pygame.image.load('images/lesson2.png')
 icon = pygame.image.load('images/icon.png')
@@ -49,7 +50,6 @@ if platform.system() == 'Windows':
 def gameLoop():
     gameExit = False
     show = 'Main Menu'
-    print('loop')
     
     gameDisplay = pygame.display.set_mode((800, 600)) # Sets display size
     pygame.display.set_caption('Wildlife Survival Guide') # Sets caption at top to Wildlife Survival Guide
@@ -127,11 +127,8 @@ def gameLoop():
                 if x >= 43 and x <= 271:
                     if y >= 264 and y <= 336:
                         if clicked[0] == 1:
-                            gameDisplay.fill((0, 0, 0))
-                            gameDisplay.blit(animationBg, (0, 0)) # Sets background image
-                            pygame.display.update()
                             show = 'Animation'
-                            break
+                            animation()
                     elif y >= 378 and y <= 449:
                         if clicked[0] == 1:
                             show = 'Quiz' # This button changes show from 'Welcome' to 'Quiz'                    
@@ -157,12 +154,48 @@ def gameLoop():
                 pygame.quit()
                 quit()
                 
+def animation():
+    show = 'Animation'
+    gameDisplay = pygame.display.set_mode((800, 600))  
+    gameDisplay.fill((0, 0, 0))
+    gameDisplay.blit(animationBg, (0, 0)) # Sets background image
+    pygame.display.update()   
+    clock.tick(60)
+    
+    gameExit = False
+    
+    while not gameExit:
+        for ev in pygame.event.get():
+            event = pygame.event.get()
+            clickPos = pygame.mouse.get_pos()
+            clicked = pygame.mouse.get_pressed()
+            x = clickPos[0]
+            y = clickPos[1] 
+            
+            if show == 'Animation':
+                if y >= 505 and y <= 575:
+                    if x >= 547 and x <= 773:
+                        if clicked[0] == 1:
+                            show = "Animation1"
+                            animation1()
+                        
+def animation1():
+    show = 'Lesson'
+    gameDisplay = pygame.display.set_mode((800, 600))   
+    gameDisplay.fill((0, 0, 0))
+    gameDisplay.blit(animation1Bg, (0, 0)) # Sets background image
+    pygame.display.update()
+    clock.tick(60)    
+                
 def lesson():
     show = 'Lesson'
-    gameDisplay = pygame.display.set_mode((800, 600))
+    gameDisplay = pygame.display.set_mode((800, 600))   
     gameDisplay.fill((0, 0, 0))
     gameDisplay.blit(lesson1Bg, (0, 0)) # Sets background image
     pygame.display.update()
+    clock.tick(60)
+    
+    gameExit = False
     
     while not gameExit:
         for ev in pygame.event.get():
@@ -172,42 +205,20 @@ def lesson():
             x = clickPos[0]
             y = clickPos[1]    
             
-            while not gameExit:
-                if show == 'Lesson':
-                    if y >= 477 and y <= 548:
-                        if x >= 48 and x <= 275:
-                            if clicked[0] == 1:
-                                gameDisplay.fill((0, 0, 0))
-                                gameDisplay.blit(lesson2Bg, (0, 0))
-                                pygame.display.update()
-                                show = 'Lesson2'
-                        if x >= 524 and x <= 751:
-                            if clicked[0] == 1:
-                                gameDisplay.fill((0, 0, 0))
-                                pygame.display.update
-                                show = 'Main Menu'
-                                mainMenu()
-    
-def mainMenu():
-    gameDisplay = pygame.display.set_mode((800, 600))
-    gameDisplay.fill((0, 0, 0)) # Set background as black 
-    gameDisplay.blit(homeScreenBg, (0, 0)) # Sets background image
-        
-    # Load buttons
-    gameDisplay.blit(storyButton, (43, 264))
-    gameDisplay.blit(instructionsButton, (286, 264))
-    gameDisplay.blit(lessonButton, (529, 264))
-    gameDisplay.blit(quizButton, (43, 378))
-    gameDisplay.blit(quizResultsButton, (286, 378))
-    gameDisplay.blit(exitButton, (529, 378))        
-    
-    # Background music
-    mixer.music.load('music/DynamiteInstrumental.mp3')
-    mixer.music.play(-1) # -1 is to keep the music looping         
-        
-    pygame.display.update()
-    
-    clock.tick(60)     
+            if show == 'Lesson':
+                if y >= 477 and y <= 548:
+                    if x >= 48 and x <= 275:
+                        if clicked[0] == 1:
+                            show = 'Lesson2'
+                            gameDisplay.fill((0, 0, 0))
+                            gameDisplay.blit(lesson2Bg, (0, 0))
+                            pygame.display.update()
+                    if x >= 524 and x <= 751:
+                        if clicked[0] == 1:
+                            show = 'Main Menu' 
+                            gameDisplay.fill((0, 0, 0))
+                            gameLoop()
+                            pygame.display.update   
 
 # Main program
 # Start game loop
