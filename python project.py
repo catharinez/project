@@ -4,7 +4,7 @@
 
 # Date: December 11, 2021
 
-# Last modified: December 18, 2021 9:04 pm by Catharine
+# Last modified: December 19, 2021 7:06 pm by Catharine
 
 # Name: Python Project (Wildlife Survival Guide)
 
@@ -27,6 +27,7 @@ homeScreenBg = pygame.image.load('images/WildlifeSurvivalBg.png')
 animationBg = pygame.image.load('images/animationscenariobg.png')
 animation1Bg = pygame.image.load('images/animation1bg.png')
 animation2s1Bg = pygame.image.load('images/animation2s1.png')
+animation2s2Bg = pygame.image.load('images/animation2s2.png')
 lesson1Bg = pygame.image.load('images/lesson1.png')
 lesson2Bg = pygame.image.load('images/lesson2.png')
 icon = pygame.image.load('images/icon.png')
@@ -138,16 +139,54 @@ def animation():
                 if y >= 505 and y <= 575:
                     if x >= 547 and x <= 773:
                         if clicked[0] == 1:
-                            show = "Animation1"
+                            show = 'Animation1'
                             animation1()
                         
 def animation1():
+    gameExit = False
     gameDisplay = pygame.display.set_mode((800, 600))   
     gameDisplay.fill((0, 0, 0))
     gameDisplay.blit(animation1Bg, (0, 0)) # Sets background image
     pygame.display.update()
     clock.tick(60)   
     show = 'Animation1'
+    
+    while not gameExit:
+        for ev in pygame.event.get():
+            event = pygame.event.get
+            clickPos = pygame.mouse.get_pos()
+            clicked = pygame.mouse.get_pressed()
+            x = clickPos[0]
+            y = clickPos[1]
+            
+            if show == 'Animation1':
+                if y >= 483 and y <= 554:
+                    if x >= 60 and x <= 287:
+                        if clicked[0] == 1:
+                            print("s1")
+                            show = 'Animation2s1'
+                            animation2s1()
+                    elif x >= 513 and x <= 740:
+                        if clicked[0] == 1:
+                            show = 'Animation2s2'
+                            
+def animation2s1():
+    gameExit = False
+    gameDisplay = pygame.display.set_mode((800, 600))   
+    gameDisplay.fill((0, 0, 0))
+    gameDisplay.blit(animation2s1Bg, (0, 0)) # Sets background image
+    pygame.display.update()
+    clock.tick(60)
+    show = 'Animation2s1'
+    
+def animation2s2():
+    gameExit = False
+    gameDisplay = pygame.display.set_mode((800, 600))   
+    gameDisplay.fill((0, 0, 0))
+    gameDisplay.blit(animation2s2Bg, (0, 0)) # Sets background image
+    pygame.display.update()
+    clock.tick(60)
+    show = 'Animation2s2' 
                 
 def lesson():
     gameExit = False
