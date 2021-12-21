@@ -4,7 +4,7 @@
 
 # Date: December 11, 2021
 
-# Last modified: December 21, 2021 11:27 am by Catharine
+# Last modified: December 21, 2021 2:35 pm by Catharine
 
 # Name: Python Project (Wildlife Survival Guide)
 
@@ -21,7 +21,6 @@ from pygame import mixer
 from pygame.locals import *
 
 # Declare and initialize variables
-gameExit = bool()
 clock = pygame.time.Clock()
 homeScreenBg = pygame.image.load('images/WildlifeSurvivalBg.png')
 animationBg = pygame.image.load('images/animationscenariobg.png')
@@ -37,6 +36,7 @@ animationEnding2Bg = pygame.image.load('images/animationending2.png')
 animationEnding3Bg = pygame.image.load('images/animationending3.png')
 animationEnding4Bg = pygame.image.load('images/animationending4.png')
 animationEnding5Bg = pygame.image.load('images/animationending5.png')
+instructionsBg = pygame.image.load('images/instructions.png')
 lesson1Bg = pygame.image.load('images/lesson1.png')
 lesson2Bg = pygame.image.load('images/lesson2.png')
 icon = pygame.image.load('images/icon.png')
@@ -112,6 +112,7 @@ def gameLoop():
                     if y >= 264 and y <= 336:
                         if ev.type == pygame.MOUSEBUTTONDOWN:
                             show = 'Instructions'
+                            instructions()
                     elif y >= 378 and y <= 449:
                         if ev.type == pygame.MOUSEBUTTONDOWN:
                             show = 'Quiz Results'                             
@@ -402,7 +403,8 @@ def ending2():
                         if ev.type == pygame.MOUSEBUTTONDOWN:
                             pygame.quit()
                             quit()
-                            
+
+# Function for ending 3 of the animation                            
 def ending3():
     gameExit = False
     gameDisplay = pygame.display.set_mode((800, 600))   
@@ -429,7 +431,8 @@ def ending3():
                         if ev.type == pygame.MOUSEBUTTONDOWN:
                             pygame.quit()
                             quit()
-                            
+
+# Function for ending 4 of the animation                            
 def ending4():
     gameExit = False
     gameDisplay = pygame.display.set_mode((800, 600))   
@@ -456,7 +459,8 @@ def ending4():
                         if ev.type == pygame.MOUSEBUTTONDOWN:
                             pygame.quit()
                             quit()        
-                            
+
+# Function for ending 5 of the animation                            
 def ending5():
     gameExit = False
     gameDisplay = pygame.display.set_mode((800, 600))   
@@ -483,6 +487,30 @@ def ending5():
                         if ev.type == pygame.MOUSEBUTTONDOWN:
                             pygame.quit()
                             quit()    
+                            
+# Function for the instructions
+def instructions():
+    gameExit = False
+    gameDisplay = pygame.display.set_mode((800, 600))   
+    gameDisplay.fill((0, 0, 0))
+    gameDisplay.blit(instructionsBg, (0, 0)) # Sets background image
+    pygame.display.update()
+    clock.tick(60)
+    show = 'Instructions'  
+    
+    while not gameExit:
+        for ev in pygame.event.get():
+            event = pygame.event.get()
+            clickPos = pygame.mouse.get_pos()
+            x = clickPos[0]
+            y = clickPos[1]    
+            
+            if show == 'Instructions':
+                if y >= 477 and y <= 548:
+                    if x >= 48 and x <= 275:
+                        if ev.type == pygame.MOUSEBUTTONDOWN:
+                            show = 'Main Menu' 
+                            gameLoop()    
 
 # Function for the lesson                
 def lesson():
