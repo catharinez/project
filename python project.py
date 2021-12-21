@@ -4,7 +4,7 @@
 
 # Date: December 11, 2021
 
-# Last modified: December 20, 2021 10:02 pm by Catharine
+# Last modified: December 21, 2021 11:27 am by Catharine
 
 # Name: Python Project (Wildlife Survival Guide)
 
@@ -35,6 +35,8 @@ animation5Bg = pygame.image.load('images/animation5.png')
 animationEnding1Bg = pygame.image.load('images/animationending1.png')
 animationEnding2Bg = pygame.image.load('images/animationending2.png')
 animationEnding3Bg = pygame.image.load('images/animationending3.png')
+animationEnding4Bg = pygame.image.load('images/animationending4.png')
+animationEnding5Bg = pygame.image.load('images/animationending5.png')
 lesson1Bg = pygame.image.load('images/lesson1.png')
 lesson2Bg = pygame.image.load('images/lesson2.png')
 icon = pygame.image.load('images/icon.png')
@@ -313,11 +315,12 @@ def animation4():
                 if y >= 483 and y <= 554:
                     if x >= 60 and x <= 287:
                         if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Animation5'
-                            animation5()
+                            show = 'AnimationEnding4'    
+                            ending4()
                     elif x >= 513 and x <= 740:
                         if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'AnimationEnding4'     
+                            show = 'Animation5'
+                            animation5()                            
                             
 # Function for part 5 of the animation
 def animation5():
@@ -336,7 +339,7 @@ def animation5():
             x = clickPos[0]
             y = clickPos[1]
             
-            if show == 'AnimationEnding1':
+            if show == 'Animation5':
                 if y >= 483 and y <= 554:
                     if x >= 513 and x <= 740:
                         if ev.type == pygame.MOUSEBUTTONDOWN:
@@ -426,6 +429,60 @@ def ending3():
                         if ev.type == pygame.MOUSEBUTTONDOWN:
                             pygame.quit()
                             quit()
+                            
+def ending4():
+    gameExit = False
+    gameDisplay = pygame.display.set_mode((800, 600))   
+    gameDisplay.fill((0, 0, 0))
+    gameDisplay.blit(animationEnding4Bg, (0, 0)) # Sets background image
+    pygame.display.update()
+    clock.tick(60)
+    show = 'AnimationEnding4'
+    
+    while not gameExit:
+        for ev in pygame.event.get():
+            event = pygame.event.get()
+            clickPos = pygame.mouse.get_pos()
+            x = clickPos[0]
+            y = clickPos[1]
+            
+            if show == 'AnimationEnding4':
+                if y >= 483 and y <= 554:
+                    if x >= 60 and x <= 287:
+                        if ev.type == pygame.MOUSEBUTTONDOWN:
+                            show = 'Main Menu'
+                            gameLoop()
+                    elif x >= 513 and x <= 740:
+                        if ev.type == pygame.MOUSEBUTTONDOWN:
+                            pygame.quit()
+                            quit()        
+                            
+def ending5():
+    gameExit = False
+    gameDisplay = pygame.display.set_mode((800, 600))   
+    gameDisplay.fill((0, 0, 0))
+    gameDisplay.blit(animationEnding5Bg, (0, 0)) # Sets background image
+    pygame.display.update()
+    clock.tick(60)
+    show = 'AnimationEnding5'    
+    
+    while not gameExit:
+        for ev in pygame.event.get():
+            event = pygame.event.get()
+            clickPos = pygame.mouse.get_pos()
+            x = clickPos[0]
+            y = clickPos[1]
+            
+            if show == 'AnimationEnding5':
+                if y >= 483 and y <= 554:
+                    if x >= 60 and x <= 287:
+                        if ev.type == pygame.MOUSEBUTTONDOWN:
+                            show = 'Main Menu'
+                            gameLoop()
+                    elif x >= 513 and x <= 740:
+                        if ev.type == pygame.MOUSEBUTTONDOWN:
+                            pygame.quit()
+                            quit()    
 
 # Function for the lesson                
 def lesson():
