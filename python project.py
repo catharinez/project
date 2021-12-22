@@ -4,7 +4,7 @@
 
 # Date: December 11, 2021
 
-# Last modified: December 21, 2021 2:35 pm by Catharine
+# Last modified: December 22, 2021 2:07 pm by Catharine
 
 # Name: Python Project (Wildlife Survival Guide)
 
@@ -39,6 +39,10 @@ animationEnding5Bg = pygame.image.load('images/animationending5.png')
 instructionsBg = pygame.image.load('images/instructions.png')
 lesson1Bg = pygame.image.load('images/lesson1.png')
 lesson2Bg = pygame.image.load('images/lesson2.png')
+citations1Bg = pygame.image.load('images/citations1.png')
+citations2Bg = pygame.image.load('images/citations2.png')
+citations3Bg = pygame.image.load('images/citations3.png')
+citations4Bg = pygame.image.load('images/citations4.png')
 icon = pygame.image.load('images/icon.png')
 storyButton = pygame.image.load('images/interactivestorybutton.png')
 storyButton = pygame.transform.scale(storyButton, (227, 71))
@@ -559,14 +563,118 @@ def lesson2():
             
             if show == 'Lesson2':
                 if y >= 477 and y <= 548:
-                    if x >= 524 and x <= 751:
+                    if x >= 48 and x <= 275:
                         if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Lesson'
+                            show = 'Lesson' 
                             lesson()
-                    elif x >= 48 and x <= 276:
+                    elif x >= 524 and x <= 751:
                         if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Main Menu'
-                            gameLoop()
+                            show = 'Citations1'
+                            citations1()
+                            
+def citations1():
+    gameExit = False 
+    gameDisplay = pygame.display.set_mode((800, 600))   
+    gameDisplay.fill((0, 0, 0))
+    gameDisplay.blit(citations1Bg, (0, 0)) # Sets background image
+    pygame.display.update()
+    clock.tick(60)
+    show = 'Citations1'
+    
+    while not gameExit:
+        for ev in pygame.event.get():
+            event = pygame.event.get()
+            clickPos = pygame.mouse.get_pos()
+            x = clickPos[0]
+            y = clickPos[1]
+            
+            if show == 'Citations1':
+                if y >= 477 and y <= 548:
+                    if x >= 48 and x <= 275:
+                        if ev.type == pygame.MOUSEBUTTONDOWN:
+                            show = 'Lesson2' 
+                            lesson2()
+                    elif x >= 524 and x <= 751:
+                        if ev.type == pygame.MOUSEBUTTONDOWN:
+                            show = 'Citations2'
+                            citations2()    
+                            
+def citations2():
+    gameExit = False 
+    gameDisplay = pygame.display.set_mode((800, 600))   
+    gameDisplay.fill((0, 0, 0))
+    gameDisplay.blit(citations2Bg, (0, 0)) # Sets background image
+    pygame.display.update()
+    clock.tick(60)
+    show = 'Citations2'
+    
+    while not gameExit:
+        for ev in pygame.event.get():
+            event = pygame.event.get()
+            clickPos = pygame.mouse.get_pos()
+            x = clickPos[0]
+            y = clickPos[1]
+            
+            if show == 'Citations2':
+                if y >= 477 and y <= 548:
+                    if x >= 48 and x <= 275:
+                        if ev.type == pygame.MOUSEBUTTONDOWN:
+                            show = 'Citations1' 
+                            citations1()
+                    elif x >= 524 and x <= 751:
+                        if ev.type == pygame.MOUSEBUTTONDOWN:
+                            show = 'Citations3'
+                            citations3()  
+
+def citations3():
+    gameExit = False 
+    gameDisplay = pygame.display.set_mode((800, 600))   
+    gameDisplay.fill((0, 0, 0))
+    gameDisplay.blit(citations3Bg, (0, 0)) # Sets background image
+    pygame.display.update()
+    clock.tick(60)
+    show = 'Citations3'
+    
+    while not gameExit:
+        for ev in pygame.event.get():
+            event = pygame.event.get()
+            clickPos = pygame.mouse.get_pos()
+            x = clickPos[0]
+            y = clickPos[1]
+            
+            if show == 'Citations3':
+                if y >= 477 and y <= 548:
+                    if x >= 48 and x <= 275:
+                        if ev.type == pygame.MOUSEBUTTONDOWN:
+                            show = 'Citations2' 
+                            citations2()
+                    elif x >= 524 and x <= 751:
+                        if ev.type == pygame.MOUSEBUTTONDOWN:
+                            show = 'Citations4'
+                            citations4()  
+                            
+def citations4():
+    gameExit = False 
+    gameDisplay = pygame.display.set_mode((800, 600))   
+    gameDisplay.fill((0, 0, 0))
+    gameDisplay.blit(citations4Bg, (0, 0)) # Sets background image
+    pygame.display.update()
+    clock.tick(60)
+    show = 'Citations4'
+    
+    while not gameExit:
+        for ev in pygame.event.get():
+            event = pygame.event.get()
+            clickPos = pygame.mouse.get_pos()
+            x = clickPos[0]
+            y = clickPos[1]
+            
+            if show == 'Citations4':
+                if y >= 477 and y <= 548:
+                    if x >= 48 and x <= 275:
+                        if ev.type == pygame.MOUSEBUTTONDOWN:
+                            show = 'Citations3' 
+                            citations3()
 
 # Start game loop
 gameLoop()
