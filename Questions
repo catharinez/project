@@ -1,48 +1,152 @@
 # *************************************************
 # Author: Catharine and Noshin
 # Date: December 11, 2021
-# Last modified: December 30, 2021 3:00 am by Noshin
+# Last modified: January 1, 2022 2:00 am by Noshin
 # Name: Python Project (Wildlife Survival Guide)
-# Description: Pygame project which teaches a lesson about wildlife survival
+# Description: Pygame project which teaches a lesson about the wildlife survival lesson
 # *************************************************
 # import module
-import pygame
 import time
 import turtle
 
-# intialize pygame
-pygame.init()
-
-# initialize variables
-screen = turtle.Screen()
-question = turtle.Turtle()
-answers = turtle.Turtle()
-correct = int(0)
-choice = int(1)
-a = turtle.Turtle()
-b = turtle.Turtle()
-c = turtle.Turtle()
-d = turtle.Turtle()
-
 # create virtual screen
-screen = turtle.Screen()
-screen.setup(800, 600)
-screen.colormode(225)
+screen = turtle.Screen ()
+screen.setup (1000, 600)
+screen.colormode (225)
 screen.bgcolor("navy")
-screen.title("Wildlife Survival Lessson")
+screen.title ("Wildlife Survival Lessson!")
 
-# create quiz beginning
-question.write(
-    "Welcome to our quiz for the Wildlife Survival Lesson.",
-    font=("Verdana", 43, "bold"),
-)
-time.sleep(4)
+# create multiple choice boxes
+# create box c
+turtle.speed (0)
+turtle.hideturtle ()
+turtle.penup ()
+turtle.goto (-450, -250)
+turtle.pendown ()
+turtle.begin_fill ()
+turtle.setheading (0)
+turtle.color ("grey")
+for sides in range (2):
+    turtle.fd (425)
+    turtle.left (90)
+    turtle.fd (125)
+    turtle.left (90)
+turtle.end_fill ()
+
+# create box d
+turtle.penup ()
+turtle.goto (25, -250)
+turtle.pendown ()
+turtle.begin_fill ()
+turtle.setheading (0)
+for sides in range (2):
+    turtle.fd (425)
+    turtle.left (90)
+    turtle.fd (125)
+    turtle.left (90)
+turtle.end_fill ()
+
+# create box a
+turtle.penup ()
+turtle.goto (-450, -75)
+turtle.pendown ()
+turtle.begin_fill ()
+turtle.setheading (0)
+for sides in range (2):
+    turtle.fd (425)
+    turtle.left (90)
+    turtle.fd (125)
+    turtle.left (90)
+turtle.end_fill ()
+
+# create box b
+turtle.penup()
+turtle.goto (25, -75)
+turtle.pendown ()
+turtle.begin_fill ()
+turtle.setheading (0)
+for sides in range (2):
+    turtle.fd (425)
+    turtle.left (90)
+    turtle.fd (125)
+    turtle.left (90)
+turtle.end_fill ()
+
+# create question box
+turtle.penup ()
+turtle.goto (-450, 100)
+turtle.pendown ()
+turtle.begin_fill ()
+turtle.setheading (0)
+for sides in range (2):
+    turtle.fd (625)
+    turtle.left (90)
+    turtle.fd (150)
+    turtle.left (90)
+turtle.end_fill ()
+
+# create answer box
+turtle.penup ()
+turtle.goto (225, 100)
+turtle.pendown ()
+turtle.begin_fill ()
+turtle.setheading (0)
+for sides in range (2):
+    turtle.fd (225)
+    turtle.left (90)
+    turtle.fd (150)
+    turtle.left (90)
+turtle.end_fill ()
+
+# initialize questions
+question = turtle.Turtle ()
+question.speed (0)
+question.hideturtle ()
+question.penup ()
+question.goto (-425, 150)
+
+# initialize answers
+answers = turtle.Turtle ()
+answers.speed (0)
+answers.hideturtle ()
+answers.penup ()
+answers.goto (250, 125)
+
+# create answer boxes for each choice box
+# box a answers
+a = turtle.Turtle ()
+a.speed (0)
+a.hideturtle ()
+a.penup ()
+a.goto (-425, -50)
+
+# box b answers
+b = turtle.Turtle ()
+b.speed (0)
+b.hideturtle ()
+b.penup ()
+b.goto (50, -50)
+
+# box c answers
+c = turtle.Turtle ()
+c.speed (0)
+c.hideturtle ()
+c.penup ()
+c.goto (-425, -225)
+
+# box d answers
+d = turtle.Turtle ()
+d.speed (0)
+d.hideturtle ()
+d.penup ()
+d.goto (50, -225)
+
+# create quiz intro
+question.write("Welcome to our quiz for the Wildlife Survival Lesson.", font=("Verdana", 43, "bold"))
+time.sleep(2)
 question.clear()
 
-question.write(
-    "Please type on the multiple choice boxes (a, b, c or d) to answer each question.",
-    font=("Verdana", 23, "bold"),
-)
+question.write("Please type on the multiple choice boxes (a, b, c or d) to answer each question.", font=("Verdana", 23, "bold"))
 time.sleep(2)
 question.clear()
 
@@ -50,49 +154,33 @@ question.write("Have fun and enjoy the quiz.", font=("Verdana", 23, "bold"))
 time.sleep(2)
 question.clear()
 
-# create questions
-question = turtle.Turtle()
-question.speed(0)
-question.hideturtle()
-question.penup()
-question.goto(-425, 150)
-
-# create question box
-turtle.penup()
-turtle.goto(-450, 100)
-turtle.pendown()
-turtle.begin_fill()
-turtle.setheading(0)
-for sides in range(2):
-    turtle.fd(625)
-    turtle.left(90)
-    turtle.fd(150)
-    turtle.left(90)
-turtle.end_fill()
-
-# create answers
-answers = turtle.Turtle()
-answers.speed(0)
-answers.hideturtle()
-answers.penup()
-answers.goto(250, 125)
-
-# create answer box
-turtle.penup()
-turtle.goto(225, 100)
-turtle.pendown()
-turtle.begin_fill()
-turtle.setheading(0)
-for sides in range(2):
-    turtle.fd(225)
-    turtle.left(90)
-    turtle.fd(150)
-    turtle.left(90)
-turtle.end_fill
-
 # number of correct answers
 correct = int(0)
-answers.write("()".format(correct), font=("Verdana", 62, "bold"))
+answers.write("{}".format(correct), font=("Verdana", 62, "bold"))
+
+# initialize variable
+choice = 1
+
+# create a key function for each choice box
+def choose_answer_a():
+    global select
+    select = 'a'
+    evaluate ()
+
+def choose_answer_b():
+    global select
+    select = 'b'
+    evaluate ()
+
+def choose_answer_c():
+    global select
+    select = 'c'
+    evaluate ()
+
+def choose_answer_d():
+    global select
+    select = 'd'
+    evaluate ()
 
 # create functions for choice boxes
 def evaluate():
@@ -103,192 +191,53 @@ def evaluate():
         question.write("Correct", font=("Verdana", 23, "bold"))
         time.sleep(1.2)
         answers.clear()
-        correct = 1
+        correct += 1
         answers.write("{}".format(correct), font=("Verdana", 62, "bold"))
     else:
         question.clear()
-        question.write(
-            "Wrong! The answer was {}".format(correct), font=("Verdana", 23, "bold")
-        )
+        question.write("Wrong! The answer was {}".format(correct), font=("Verdana", 23, "bold"))
         time.sleep(1.2)
         question.clear()
-        correct = 1
-        clearscreen()
-        next_question
+    choice += 1
+    clearscreen ()
+    next_question ()
 
+def next_question ():
+    if choice == 2:
+      question_two ()
+    if choice == 3:
+      question_three ()
+    if choice == 4:
+      question_four ()
+    if choice == 5:
+      question_five ()
 
-def next_question():
-    if correct == 2:
-        question_two()
-
-
-def clearscreen():
-    question.clear()
-    a.clear()
-    b.clear()
-    c.clear()
-    d.clear()
-
-
-# create answer boxes for each choice box
-# create box a
-turtle.speed(0)
-turtle.hideturtle()
-turtle.penup()
-turtle.goto(-450, -75)
-turtle.pendown()
-turtle.begin_fill()
-turtle.setheading(0)
-turtle.color("grey")
-for sides in range(2):
-    turtle.fd(425)
-    turtle.left(90)
-    turtle.fd(125)
-    turtle.left(90)
-turtle.end_fill
-
-# box a answers
-a = turtle.Turtle()
-a.speed(0)
-a.hideturtle()
-a.penup()
-a.goto(-425, -50)
-
-# create box b
-turtle.speed(0)
-turtle.hideturtle()
-turtle.penup()
-turtle.goto(25, -75)
-turtle.pendown()
-turtle.begin_fill()
-turtle.setheading(0)
-turtle.color("grey")
-for sides in range(2):
-    turtle.fd(425)
-    turtle.left(90)
-    turtle.fd(125)
-    turtle.left(90)
-turtle.end_fill
-
-# create box b answers
-b = turtle.Turtle()
-b.speed(0)
-b.hideturtle()
-b.penup()
-b.goto(50, -50)
-
-# create box c
-turtle.speed(0)
-turtle.hideturtle()
-turtle.penup()
-turtle.goto(-450, -250)
-turtle.pendown()
-turtle.begin_fill()
-turtle.setheading(0)
-turtle.color("grey")
-for sides in range(2):
-    turtle.fd(425)
-    turtle.left(90)
-    turtle.fd(125)
-    turtle.left(90)
-turtle.end_fill
-
-# create box c answers
-c = turtle.Turtle()
-c.speed(0)
-c.hideturtle()
-c.penup()
-c.goto(-425, -225)
-
-# create box d
-turtle.speed(0)
-turtle.hideturtle()
-turtle.penup()
-turtle.goto(25, -250)
-turtle.pendown()
-turtle.begin_fill()
-turtle.setheading(0)
-turtle.color("grey")
-for sides in range(2):
-    turtle.fd(425)
-    turtle.left(90)
-    turtle.fd(125)
-    turtle.left(90)
-turtle.end_fill
-
-# create box d answers
-d = turtle.Turtle()
-d.speed(0)
-d.hideturtle()
-d.penup()
-d.goto(50, -225)
-
-# create a key function for each choice box
-def choose_answer_a():
-    global select
-    select = "a"
-    evaluate()
-
-
-def choose_answer_b():
-    global select
-    select = "b"
-    evaluate()
-
-
-def choose_answer_c():
-    global select
-    select = "c"
-    evaluate()
-
-
-# create a key function for box d
-def choose_answer_d():
-    global select
-    select = "d"
-    evaluate()
-
-
-# create key bindings
-screen.listen()
-screen.onkeypress(choose_answer_a, "a")
-screen.onkeypress(choose_answer_b, "b")
-screen.onkeypress(choose_answer_c, "c")
-screen.onkeypress(choose_answer_d, "d")
+def clearscreen ():
+    question.clear ()
+    a.clear ()
+    b.clear ()
+    c.clear ()
+    d.clear ()
 
 # create functions for each question
-def question_one():
-    question.write(
-        "Eating raw meat can possibly cause all of the following poisonings except:",
-        font=("Verdana", 23, "Bold"),
-    )
-    a.write("a. Lead", font=("Verdana", 23, "Bold"))
-    b.write("b. Lead", font=("Verdana", 23, "Bold"))
-    c.write("c. Lead", font=("Verdana", 23, "Bold"))
-    d.write("d. Lead", font=("Verdana", 23, "Bold"))
+def question_one ():
+    question.write("Eating raw meat can possibly cause all of the following poisonings except:", font=("Verdana", 23, "Bold"))
+    a.write ("a. Lead", font=("Verdana", 23, "Bold"))
+    b.write ("b. E.coli", font=("Verdana", 23, "Bold"))
+    c.write ("c. Salmonella", font=("Verdana", 23, "Bold"))
+    d.write ("d. Scomboid", font=("Verdana", 23, "Bold"))
     global correct
-    correct = "a"
+    correct = 'a'
 
-
-def question_two():
-    question.write(
-        "What is the first step in order to build a fire?", font=("Verdana", 23, "Bold")
-    )
+def question_two ():
+    question.write("What is the first step in order to build a fire?", font=("Verdana", 23, "Bold"))
     a.write("a. Place logs in a cross structure.", font=("Verdana", 23, "Bold"))
-    b.write(
-        "b. If matches are available, use a match to start a fire. Otherwise, rub sticks together to start a fire.",
-        font=("Verdana", 23, "Bold"),
-    )
-    c.write(
-        "c. Clear a circular area and surround it using large rocks.",
-        font=("Verdana", 23, "Bold"),
-    )
-    d.write(
-        "d. Use twigs and leaves as natural kindling.", font=("Verdana", 23, "Bold")
-    )
+    b.write("b. If matches are available, use a match to start a fire. Otherwise, rub sticks together to start a fire.",
+        font=("Verdana", 23, "Bold"))
+    c.write("c. Clear a circular area and surround it using large rocks.", font=("Verdana", 23, "Bold"))
+    d.write("d. Use twigs and leaves as natural kindling.", font=("Verdana", 23, "Bold"))
     global correct
-    correct = "c"
-
+    correct = 'a'
 
 def question_three():
     question.write(
@@ -305,7 +254,6 @@ def question_three():
     global correct
     correct = "b"
 
-
 def question_four():
     question.write(
         "When you are hungry in an unknown place, the best thing to do is:",
@@ -317,7 +265,6 @@ def question_four():
     d.write("d. Hunt and eat raw meat.", font=("Verdana", 23, "Bold"))
     global correct
     correct = "c"
-
 
 def question_five():
     question.write(
@@ -331,5 +278,12 @@ def question_five():
     global correct
     correct = "c"
 
-    # output
-    question_one()
+# create key bindings
+screen.listen()
+screen.onkeypress(choose_answer_a, "a")
+screen.onkeypress(choose_answer_b, "b")
+screen.onkeypress(choose_answer_c, "c")
+screen.onkeypress(choose_answer_d, "d")
+
+# output
+question_one()
