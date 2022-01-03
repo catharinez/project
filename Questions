@@ -142,21 +142,21 @@ d.penup ()
 d.goto (50, -225)
 
 # create quiz intro
-question.write("Welcome to our quiz for the Wildlife Survival Lesson.", font=("Verdana", 43, "bold"))
+question.write("Welcome to our quiz for the Wildlife Survival Lesson.", font=("Verdana", 43))
 time.sleep(2)
 question.clear()
 
-question.write("Please type on the multiple choice boxes (a, b, c or d) to answer each question.", font=("Verdana", 23, "bold"))
+question.write("Please type on the multiple choice boxes (a, b, c or d) to answer each question.", font=("Verdana", 23))
 time.sleep(2)
 question.clear()
 
-question.write("Have fun and enjoy the quiz.", font=("Verdana", 23, "bold"))
+question.write("Have fun and enjoy the quiz.", font=("Verdana", 23))
 time.sleep(2)
 question.clear()
 
 # number of correct answers
 correct = int(0)
-answers.write("{}".format(correct), font=("Verdana", 62, "bold"))
+answers.write("{}".format(correct), font=("Verdana", 62,))
 
 # initialize variable
 choice = 1
@@ -188,14 +188,14 @@ def evaluate():
     global choice
     if correct == select:
         question.clear()
-        question.write("Correct", font=("Verdana", 23, "bold"))
+        question.write("Correct", font=("Verdana", 23))
         time.sleep(1.2)
         answers.clear()
         correct += 1
-        answers.write("{}".format(correct), font=("Verdana", 62, "bold"))
+        answers.write("{}".format(correct), font=("Verdana", 62))
     else:
         question.clear()
-        question.write("Wrong! The answer was {}".format(correct), font=("Verdana", 23, "bold"))
+        question.write("Wrong! The answer was {}".format(correct), font=("Verdana", 23))
         time.sleep(1.2)
         question.clear()
     choice += 1
@@ -221,62 +221,54 @@ def clearscreen ():
 
 # create functions for each question
 def question_one ():
-    question.write("Eating raw meat can possibly cause all of the following poisonings except:", font=("Verdana", 23, "Bold"))
-    a.write ("a. Lead", font=("Verdana", 23, "Bold"))
-    b.write ("b. E.coli", font=("Verdana", 23, "Bold"))
-    c.write ("c. Salmonella", font=("Verdana", 23, "Bold"))
-    d.write ("d. Scomboid", font=("Verdana", 23, "Bold"))
+    question.write("Eating raw meat can possibly cause all of the following poisonings except:", font=("Verdana", 23))
+    a.write ("a. Lead", font=("Verdana", 23))
+    b.write ("b. E.coli", font=("Verdana", 23))
+    c.write ("c. Salmonella", font=("Verdana", 23))
+    d.write ("d. Scomboid", font=("Verdana", 23))
     global correct
     correct = 'a'
 
 def question_two ():
-    question.write("What is the first step in order to build a fire?", font=("Verdana", 23, "Bold"))
-    a.write("a. Place logs in a cross structure.", font=("Verdana", 23, "Bold"))
+    question.write("What is the first step in order to build a fire?", font=("Verdana", 23))
+    a.write("a. Place logs in a cross structure.", font=("Verdana", 23))
     b.write("b. If matches are available, use a match to start a fire. Otherwise, rub sticks together to start a fire.",
-        font=("Verdana", 23, "Bold"))
-    c.write("c. Clear a circular area and surround it using large rocks.", font=("Verdana", 23, "Bold"))
-    d.write("d. Use twigs and leaves as natural kindling.", font=("Verdana", 23, "Bold"))
+        font=("Verdana", 23))
+    c.write("c. Clear a circular area and surround it using large rocks.", font=("Verdana", 23))
+    d.write("d. Use twigs and leaves as natural kindling.", font=("Verdana", 23))
     global correct
     correct = 'a'
 
 def question_three():
     question.write(
         "Which of the following should you not do when trying to signal a helicopter?",
-        font=("Verdana", 23, "Bold"),
-    )
-    a.write("a. Make a “Y” shaped arm gesture.", font=("Verdana", 23, "Bold"))
-    b.write("b. Yell for help", font=("Verdana", 23, "Bold"))
-    c.write("c. Start a fire", font=("Verdana", 23, "Bold"))
-    d.write(
-        "d. Waver your arms in a crossed position above your head.",
-        font=("Verdana", 23, "Bold"),
-    )
+        font=("Verdana", 23))
+    a.write("a. Make a “Y” shaped arm gesture.", font=("Verdana", 23))
+    b.write("b. Yell for help", font=("Verdana", 23))
+    c.write("c. Start a fire", font=("Verdana", 23))
+    d.write("d. Waver your arms in a crossed position above your head.", font=("Verdana", 23))
     global correct
-    correct = "b"
+    correct = 'b'
 
 def question_four():
     question.write(
         "When you are hungry in an unknown place, the best thing to do is:",
-        font=("Verdana", 23, "Bold"),
-    )
-    a.write("a. Eat nothing.", font=("Verdana", 23, "Bold"))
-    b.write("b. Drink water.", font=("Verdana", 23, "Bold"))
-    c.write("c. Find berries.", font=("Verdana", 23, "Bold"))
-    d.write("d. Hunt and eat raw meat.", font=("Verdana", 23, "Bold"))
+        font=("Verdana", 23))
+    a.write("a. Eat nothing.", font=("Verdana", 23))
+    b.write("b. Drink water.", font=("Verdana", 23))
+    c.write("c. Find berries.", font=("Verdana", 23))
+    d.write("d. Hunt and eat raw meat.", font=("Verdana", 23))
     global correct
-    correct = "c"
+    correct = 'c'
 
-def question_five():
-    question.write(
-        "From the interactive story, what was the first thing you did?",
-        font=("Verdana", 23, "Bold"),
-    )
-    a.write("a. Find food.", font=("Verdana", 23, "Bold"))
-    b.write("b. Find shelter.", font=("Verdana", 23, "Bold"))
-    c.write("c. Find humans.", font=("Verdana", 23, "Bold"))
-    d.write("d. Find water.", font=("Verdana", 23, "Bold"))
+def question_five ():
+    question.write("From the interactive story, what was the first thing you did?",font=("Verdana", 23))
+    a.write("a. Find food.", font=("Verdana", 23))
+    b.write("b. Find shelter.", font=("Verdana", 23))
+    c.write("c. Find humans.", font=("Verdana", 23))
+    d.write("d. Find water.", font=("Verdana", 23))
     global correct
-    correct = "c"
+    correct = 'c'
 
 # create key bindings
 screen.listen()
@@ -286,4 +278,4 @@ screen.onkeypress(choose_answer_c, "c")
 screen.onkeypress(choose_answer_d, "d")
 
 # output
-question_one()
+question_one ()
