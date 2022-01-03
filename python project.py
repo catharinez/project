@@ -4,7 +4,7 @@
 
 # Date: December 11, 2021
 
-# Last modified: December 22, 2021 2:07 pm by Catharine
+# Last modified: January 3, 2022 5:32 pm by Catharine
 
 # Name: Python Project (Wildlife Survival Guide)
 
@@ -66,7 +66,6 @@ if platform.system() == 'Windows':
 # Function which keeps the program running
 def gameLoop():
     gameExit = False
-    show = 'Main Menu'
     
     gameDisplay = pygame.display.set_mode((800, 600)) # Sets display size
     pygame.display.set_caption('Wildlife Survival Guide') # Sets caption at top to Wildlife Survival Guide
@@ -103,32 +102,25 @@ def gameLoop():
             y = clickPos[1]
             
             # Checks if where the user clicked is in the range of a button
-            if show == 'Main Menu':
+            if ev.type == pygame.MOUSEBUTTONDOWN:
                 if x >= 43 and x <= 271:
                     if y >= 264 and y <= 336:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Animation'
-                            animation()
+                        animation()
                     elif y >= 378 and y <= 449:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Quiz'                
+                        print() # This will be left here until we finish the quiz results to prevent an error due to indentation
+                        # quiz() This is for once we finish the quiz
                 elif x >= 286 and x <= 513:
                     if y >= 264 and y <= 336:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Instructions'
-                            instructions()
+                        instructions()
                     elif y >= 378 and y <= 449:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Quiz Results'                             
+                        print() # This will be left here until we finish the quiz results to prevent an error due to indentation
+                        # quizresults() This is for once we finish the quiz results                            
                 elif x >= 529 and x <= 756:
                     if y >= 264 and y <= 336:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Lesson' 
-                            lesson()
+                        lesson()
                     elif y >= 378 and y <= 449:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            pygame.quit() 
-                            quit()
+                        pygame.quit() 
+                        quit()
         
             # Exits the game
             if event == pygame.quit:
@@ -143,7 +135,6 @@ def animation():
     gameDisplay.blit(animationBg, (0, 0)) # Sets background image
     pygame.display.update()   
     clock.tick(60)
-    show = 'Animation'
     
     while not gameExit:
         for ev in pygame.event.get():
@@ -152,12 +143,10 @@ def animation():
             x = clickPos[0]
             y = clickPos[1] 
             
-            if show == 'Animation':
+            if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 505 and y <= 575:
                     if x >= 547 and x <= 773:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Animation1'
-                            animation1()
+                        animation1()
 
 # Function for Part 1 of the animation                        
 def animation1():
@@ -167,25 +156,19 @@ def animation1():
     gameDisplay.blit(animation1Bg, (0, 0)) # Sets background image
     pygame.display.update()
     clock.tick(60)   
-    show = 'Animation1'
     
     while not gameExit:
         for ev in pygame.event.get():
-            event = pygame.event.get
             clickPos = pygame.mouse.get_pos()
             x = clickPos[0]
             y = clickPos[1]
             
-            if show == 'Animation1':
+            if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 483 and y <= 554:
                     if x >= 60 and x <= 287:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Animation2s1'
-                            animation2s1()
+                        animation2s1()
                     elif x >= 513 and x <= 740:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Animation2s2'
-                            animation2s2()
+                        animation2s2()
 
 # Function for part 2 scenario 1 of the animation                            
 def animation2s1():
@@ -195,25 +178,19 @@ def animation2s1():
     gameDisplay.blit(animation2s1Bg, (0, 0)) # Sets background image
     pygame.display.update()
     clock.tick(60)
-    show = 'Animation2s1'
     
     while not gameExit:
         for ev in pygame.event.get():
-            event = pygame.event.get()
             clickPos = pygame.mouse.get_pos()
             x = clickPos[0]
             y = clickPos[1]
             
-            if show == 'Animation2s1':
+            if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 483 and y <= 554:
                     if x >= 60 and x <= 287:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Animation3'
-                            animation3()
+                        animation3()
                     elif x >= 513 and x <= 740:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'AnimationEnding1'
-                            ending1()                
+                        ending1()                
 
 # Function for part 2 scenario 2 of the animation    
 def animation2s2():
@@ -223,25 +200,19 @@ def animation2s2():
     gameDisplay.blit(animation2s2Bg, (0, 0)) # Sets background image
     pygame.display.update()
     clock.tick(60)
-    show = 'Animation2s2' 
     
     while not gameExit:
         for ev in pygame.event.get():
-            event = pygame.event.get()
             clickPos = pygame.mouse.get_pos()
             x = clickPos[0]
             y = clickPos[1]   
             
-            if show == 'Animation2s2':
+            if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 483 and y <= 554:
                     if x >= 60 and x <= 287:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'AnimationEnding2'
-                            ending2()
-                    elif x >= 513 and x <= 740:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Animation2.1'   
-                            animation21()
+                        ending2()
+                    elif x >= 513 and x <= 740:  
+                        animation21()
                             
 # Function for part 2.1 of the animation
 def animation21():
@@ -251,25 +222,19 @@ def animation21():
     gameDisplay.blit(animation21Bg, (0, 0)) # Sets background image
     pygame.display.update()
     clock.tick(60)
-    show = 'Animation2.1'
     
     while not gameExit:
         for ev in pygame.event.get():
-            event = pygame.event.get()
             clickPos = pygame.mouse.get_pos()
             x = clickPos[0]
             y = clickPos[1]
             
-            if show == 'Animation2.1':
+            if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 483 and y <= 554:
                     if x >= 60 and x <= 287:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Animation3'
-                            animation3()
+                        animation3()
                     elif x >= 513 and x <= 740:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'AnimationEnding1'
-                            ending1()      
+                        ending1()      
     
 # Function for part 3 of the animation
 def animation3():
@@ -278,26 +243,20 @@ def animation3():
     gameDisplay.fill((0, 0, 0))
     gameDisplay.blit(animation3Bg, (0, 0)) # Sets background image
     pygame.display.update()
-    clock.tick(60)
-    show = 'Animation3'    
+    clock.tick(60)   
     
     while not gameExit:
         for ev in pygame.event.get():
-            event = pygame.event.get()
             clickPos = pygame.mouse.get_pos()
             x = clickPos[0]
             y = clickPos[1]
             
-            if show == 'Animation3':
+            if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 483 and y <= 554:
                     if x >= 60 and x <= 287:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'AnimationEnding3'
-                            ending3() 
+                        ending3() 
                     elif x >= 513 and x <= 740:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:  
-                            show = 'Animation4'
-                            animation4()                            
+                        animation4()                            
 
 # Function for part 4 of the animation                            
 def animation4():
@@ -307,25 +266,19 @@ def animation4():
     gameDisplay.blit(animation4Bg, (0, 0)) # Sets background image
     pygame.display.update()
     clock.tick(60)
-    show = 'Animation4' 
     
     while not gameExit:
         for ev in pygame.event.get():
-            event = pygame.event.get()
             clickPos = pygame.mouse.get_pos()
             x = clickPos[0]
             y = clickPos[1]
             
-            if show == 'Animation4':
+            if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 483 and y <= 554:
                     if x >= 60 and x <= 287:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'AnimationEnding4'    
-                            ending4()
+                        ending4()
                     elif x >= 513 and x <= 740:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Animation5'
-                            animation5()                            
+                        animation5()                            
                             
 # Function for part 5 of the animation
 def animation5():
@@ -334,22 +287,18 @@ def animation5():
     gameDisplay.fill((0, 0, 0))
     gameDisplay.blit(animation5Bg, (0, 0)) # Sets background image
     pygame.display.update()
-    clock.tick(60)
-    show = 'Animation5'     
+    clock.tick(60)     
     
     while not gameExit:
         for ev in pygame.event.get():
-            event = pygame.event.get()
             clickPos = pygame.mouse.get_pos()
             x = clickPos[0]
             y = clickPos[1]
             
-            if show == 'Animation5':
+            if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 483 and y <= 554:
                     if x >= 513 and x <= 740:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'AnimationEnding5'
-                            ending5()    
+                        ending5()    
     
 
 # Function for ending 1 of the animation
@@ -359,26 +308,21 @@ def ending1():
     gameDisplay.fill((0, 0, 0))
     gameDisplay.blit(animationEnding1Bg, (0, 0)) # Sets background image
     pygame.display.update()
-    clock.tick(60)
-    show = 'AnimationEnding1'   
+    clock.tick(60)  
     
     while not gameExit:
         for ev in pygame.event.get():
-            event = pygame.event.get()
             clickPos = pygame.mouse.get_pos()
             x = clickPos[0]
             y = clickPos[1]
             
-            if show == 'AnimationEnding1':
+            if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 483 and y <= 554:
                     if x >= 60 and x <= 287:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Main Menu'
-                            gameLoop()
+                        gameLoop()
                     elif x >= 513 and x <= 740:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            pygame.quit()
-                            quit()    
+                        pygame.quit()
+                        quit()    
 
 # Function for ending 2 of the animation                            
 def ending2():
@@ -387,26 +331,21 @@ def ending2():
     gameDisplay.fill((0, 0, 0))
     gameDisplay.blit(animationEnding2Bg, (0, 0)) # Sets background image
     pygame.display.update()
-    clock.tick(60)
-    show = 'AnimationEnding2'    
+    clock.tick(60)   
     
     while not gameExit:
         for ev in pygame.event.get():
-            event = pygame.event.get()
             clickPos = pygame.mouse.get_pos()
             x = clickPos[0]
             y = clickPos[1]
             
-            if show == 'AnimationEnding2':
+            if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 483 and y <= 554:
                     if x >= 60 and x <= 287:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Main Menu'
-                            gameLoop()
+                        gameLoop()
                     elif x >= 513 and x <= 740:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            pygame.quit()
-                            quit()
+                        pygame.quit()
+                        quit()
 
 # Function for ending 3 of the animation                            
 def ending3():
@@ -416,25 +355,20 @@ def ending3():
     gameDisplay.blit(animationEnding3Bg, (0, 0)) # Sets background image
     pygame.display.update()
     clock.tick(60)
-    show = 'AnimationEnding3'    
     
     while not gameExit:
         for ev in pygame.event.get():
-            event = pygame.event.get()
             clickPos = pygame.mouse.get_pos()
             x = clickPos[0]
             y = clickPos[1]
             
-            if show == 'AnimationEnding3':
+            if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 483 and y <= 554:
                     if x >= 60 and x <= 287:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Main Menu'
-                            gameLoop()
+                        gameLoop()
                     elif x >= 513 and x <= 740:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            pygame.quit()
-                            quit()
+                        pygame.quit()
+                        quit()
 
 # Function for ending 4 of the animation                            
 def ending4():
@@ -444,25 +378,20 @@ def ending4():
     gameDisplay.blit(animationEnding4Bg, (0, 0)) # Sets background image
     pygame.display.update()
     clock.tick(60)
-    show = 'AnimationEnding4'
     
     while not gameExit:
         for ev in pygame.event.get():
-            event = pygame.event.get()
             clickPos = pygame.mouse.get_pos()
             x = clickPos[0]
             y = clickPos[1]
             
-            if show == 'AnimationEnding4':
+            if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 483 and y <= 554:
                     if x >= 60 and x <= 287:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Main Menu'
-                            gameLoop()
+                        gameLoop()
                     elif x >= 513 and x <= 740:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            pygame.quit()
-                            quit()        
+                        pygame.quit()
+                        quit()        
 
 # Function for ending 5 of the animation                            
 def ending5():
@@ -471,26 +400,21 @@ def ending5():
     gameDisplay.fill((0, 0, 0))
     gameDisplay.blit(animationEnding5Bg, (0, 0)) # Sets background image
     pygame.display.update()
-    clock.tick(60)
-    show = 'AnimationEnding5'    
+    clock.tick(60)    
     
     while not gameExit:
         for ev in pygame.event.get():
-            event = pygame.event.get()
             clickPos = pygame.mouse.get_pos()
             x = clickPos[0]
             y = clickPos[1]
             
-            if show == 'AnimationEnding5':
+            if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 483 and y <= 554:
                     if x >= 60 and x <= 287:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Main Menu'
-                            gameLoop()
+                        gameLoop()
                     elif x >= 513 and x <= 740:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            pygame.quit()
-                            quit()    
+                        pygame.quit()
+                        quit()    
                             
 # Function for the instructions
 def instructions():
@@ -499,22 +423,18 @@ def instructions():
     gameDisplay.fill((0, 0, 0))
     gameDisplay.blit(instructionsBg, (0, 0)) # Sets background image
     pygame.display.update()
-    clock.tick(60)
-    show = 'Instructions'  
+    clock.tick(60)  
     
     while not gameExit:
         for ev in pygame.event.get():
-            event = pygame.event.get()
             clickPos = pygame.mouse.get_pos()
             x = clickPos[0]
             y = clickPos[1]    
             
-            if show == 'Instructions':
+            if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 477 and y <= 548:
                     if x >= 48 and x <= 275:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Main Menu' 
-                            gameLoop()    
+                        gameLoop()    
 
 # Function for the lesson                
 def lesson():
@@ -524,25 +444,19 @@ def lesson():
     gameDisplay.blit(lesson1Bg, (0, 0)) # Sets background image
     pygame.display.update()
     clock.tick(60)
-    show = 'Lesson'
     
     while not gameExit:
         for ev in pygame.event.get():
-            event = pygame.event.get()
             clickPos = pygame.mouse.get_pos()
             x = clickPos[0]
             y = clickPos[1]    
             
-            if show == 'Lesson':
+            if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 477 and y <= 548:
                     if x >= 48 and x <= 275:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Main Menu' 
-                            gameLoop()
+                        gameLoop()
                     elif x >= 524 and x <= 751:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Lesson2'
-                            lesson2()
+                        lesson2()
 
 # Function for the second part of the lesson                            
 def lesson2():
@@ -551,27 +465,22 @@ def lesson2():
     gameDisplay.fill((0, 0, 0))
     gameDisplay.blit(lesson2Bg, (0, 0)) # Sets background image
     pygame.display.update()
-    clock.tick(60)
-    show = 'Lesson2'   
+    clock.tick(60) 
     
     while not gameExit:
         for ev in pygame.event.get():
-            event = pygame.event.get()
             clickPos = pygame.mouse.get_pos()
             x = clickPos[0]
             y = clickPos[1]
             
-            if show == 'Lesson2':
+            if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 477 and y <= 548:
                     if x >= 48 and x <= 275:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Lesson' 
-                            lesson()
+                        lesson()
                     elif x >= 524 and x <= 751:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Citations1'
-                            citations1()
-                            
+                        citations1()
+
+# Function for the first part of the citations                            
 def citations1():
     gameExit = False 
     gameDisplay = pygame.display.set_mode((800, 600))   
@@ -579,26 +488,21 @@ def citations1():
     gameDisplay.blit(citations1Bg, (0, 0)) # Sets background image
     pygame.display.update()
     clock.tick(60)
-    show = 'Citations1'
     
     while not gameExit:
         for ev in pygame.event.get():
-            event = pygame.event.get()
             clickPos = pygame.mouse.get_pos()
             x = clickPos[0]
             y = clickPos[1]
             
-            if show == 'Citations1':
+            if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 477 and y <= 548:
                     if x >= 48 and x <= 275:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Lesson2' 
-                            lesson2()
+                        lesson2()
                     elif x >= 524 and x <= 751:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Citations2'
-                            citations2()    
-                            
+                        citations2()    
+
+# Function for the second part of the citations                            
 def citations2():
     gameExit = False 
     gameDisplay = pygame.display.set_mode((800, 600))   
@@ -606,26 +510,21 @@ def citations2():
     gameDisplay.blit(citations2Bg, (0, 0)) # Sets background image
     pygame.display.update()
     clock.tick(60)
-    show = 'Citations2'
     
     while not gameExit:
         for ev in pygame.event.get():
-            event = pygame.event.get()
             clickPos = pygame.mouse.get_pos()
             x = clickPos[0]
             y = clickPos[1]
             
-            if show == 'Citations2':
+            if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 477 and y <= 548:
                     if x >= 48 and x <= 275:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Citations1' 
-                            citations1()
+                        citations1()
                     elif x >= 524 and x <= 751:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Citations3'
-                            citations3()  
+                        citations3()  
 
+# Function for the third part of the citations
 def citations3():
     gameExit = False 
     gameDisplay = pygame.display.set_mode((800, 600))   
@@ -633,26 +532,21 @@ def citations3():
     gameDisplay.blit(citations3Bg, (0, 0)) # Sets background image
     pygame.display.update()
     clock.tick(60)
-    show = 'Citations3'
     
     while not gameExit:
         for ev in pygame.event.get():
-            event = pygame.event.get()
             clickPos = pygame.mouse.get_pos()
             x = clickPos[0]
             y = clickPos[1]
             
-            if show == 'Citations3':
+            if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 477 and y <= 548:
                     if x >= 48 and x <= 275:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Citations2' 
-                            citations2()
+                        citations2()
                     elif x >= 524 and x <= 751:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Citations4'
-                            citations4()  
-                            
+                        citations4()  
+
+# Function for the fourth part of the citations                            
 def citations4():
     gameExit = False 
     gameDisplay = pygame.display.set_mode((800, 600))   
@@ -660,21 +554,17 @@ def citations4():
     gameDisplay.blit(citations4Bg, (0, 0)) # Sets background image
     pygame.display.update()
     clock.tick(60)
-    show = 'Citations4'
     
     while not gameExit:
         for ev in pygame.event.get():
-            event = pygame.event.get()
             clickPos = pygame.mouse.get_pos()
             x = clickPos[0]
             y = clickPos[1]
             
-            if show == 'Citations4':
+            if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 477 and y <= 548:
                     if x >= 48 and x <= 275:
-                        if ev.type == pygame.MOUSEBUTTONDOWN:
-                            show = 'Citations3' 
-                            citations3()
+                        citations3()
 
 # Start game loop
 gameLoop()
