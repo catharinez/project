@@ -4,7 +4,7 @@
 
 # Date: December 11, 2021
 
-# Last modified: January 3, 2022 5:32 pm by Catharine
+# Last modified: January 4, 2022 4:27 pm by Catharine
 
 # Name: Python Project (Wildlife Survival Guide)
 
@@ -22,7 +22,8 @@ from pygame.locals import *
 
 # Declare and initialize variables
 clock = pygame.time.Clock()
-homeScreenBg = pygame.image.load('images/WildlifeSurvivalBg.png')
+titleScreenBg = pygame.image.load('images/titlescreenbg.png')
+mainMenuBg = pygame.image.load('images/WildlifeSurvivalBg.png')
 animationBg = pygame.image.load('images/animationscenariobg.png')
 animation1Bg = pygame.image.load('images/animation1bg.png')
 animation2s1Bg = pygame.image.load('images/animation2s1.png')
@@ -62,33 +63,53 @@ if platform.system() == 'Windows':
     os.environ['SDL_VIDEODRIVER'] = 'windib'
 
 # Define functions
-
-# Function which keeps the program running
-def gameLoop():
+# Function for the title screen
+def titleScreen():
     gameExit = False
-    
-    gameDisplay = pygame.display.set_mode((800, 600)) # Sets display size
-    pygame.display.set_caption('Wildlife Survival Guide') # Sets caption at top to Wildlife Survival Guide
+
+    gameDisplay = pygame.display.set_mode((800, 600)) # Set display size
+    pygame.display.set_caption('Wildlife Survival Guide') # Set caption at top to Wildlife Survival Guide
     pygame.display.set_icon(icon) # Sets icon   
+    
+    # Set background
+    gameDisplay.blit(titleScreenBg, (0, 0)) 
+    
+    # Background music
+    mixer.music.load('music/DynamiteInstrumental.mp3')
+    mixer.music.play(-1) # -1 is to keep the music looping     
     
     pygame.display.update()
     
-    # Sets background
-    gameDisplay.fill((0, 0, 0)) 
-    gameDisplay.blit(homeScreenBg, (0, 0)) 
+    clock.tick(60) 
     
-    # Load buttons
+    while not gameExit:
+        for ev in pygame.event.get():
+            event = pygame.event.get()
+            clickPos = pygame.mouse.get_pos()
+            x = clickPos[0]
+            y = clickPos[1]
+            
+            # Check if where the user clicked is in the range of a button
+            if ev.type == pygame.MOUSEBUTTONDOWN:
+                if x >= 524 and x <= 751:
+                    if y >= 477 and y <= 548:
+                        mainMenu()                
+
+# Function for the main menu
+def mainMenu():
+    gameExit = False
+    gameDisplay = pygame.display.set_mode((800, 600))
+    
+    # Set background
+    gameDisplay.blit(mainMenuBg, (0, 0)) 
+    
+    # Display buttons
     gameDisplay.blit(storyButton, (43, 264))
     gameDisplay.blit(instructionsButton, (286, 264))
     gameDisplay.blit(lessonButton, (529, 264))
     gameDisplay.blit(quizButton, (43, 378))
     gameDisplay.blit(quizResultsButton, (286, 378))
     gameDisplay.blit(exitButton, (529, 378))        
-    
-    # Background music
-    mixer.music.load('music/DynamiteInstrumental.mp3')
-    mixer.music.play(-1) # -1 is to keep the music looping         
-        
     pygame.display.update()
     
     clock.tick(60)      
@@ -107,7 +128,7 @@ def gameLoop():
                     if y >= 264 and y <= 336:
                         animation()
                     elif y >= 378 and y <= 449:
-                        print() # This will be left here until we finish the quiz results to prevent an error due to indentation
+                        print() # This will be left here until we finish the quiz to prevent an error due to indentation
                         # quiz() This is for once we finish the quiz
                 elif x >= 286 and x <= 513:
                     if y >= 264 and y <= 336:
@@ -121,18 +142,12 @@ def gameLoop():
                     elif y >= 378 and y <= 449:
                         pygame.quit() 
                         quit()
-        
-            # Exits the game
-            if event == pygame.quit:
-                pygame.quit()
-                quit()
 
 # Function for the animation                
 def animation():
     gameExit = False
     gameDisplay = pygame.display.set_mode((800, 600))  
-    gameDisplay.fill((0, 0, 0))
-    gameDisplay.blit(animationBg, (0, 0)) # Sets background image
+    gameDisplay.blit(animationBg, (0, 0)) # Set background image
     pygame.display.update()   
     clock.tick(60)
     
@@ -143,6 +158,7 @@ def animation():
             x = clickPos[0]
             y = clickPos[1] 
             
+            # Check if where the user clicked is in the range of a button
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 505 and y <= 575:
                     if x >= 547 and x <= 773:
@@ -152,7 +168,6 @@ def animation():
 def animation1():
     gameExit = False
     gameDisplay = pygame.display.set_mode((800, 600))   
-    gameDisplay.fill((0, 0, 0))
     gameDisplay.blit(animation1Bg, (0, 0)) # Sets background image
     pygame.display.update()
     clock.tick(60)   
@@ -163,6 +178,7 @@ def animation1():
             x = clickPos[0]
             y = clickPos[1]
             
+            # Check if where the user clicked is in the range of a button
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 483 and y <= 554:
                     if x >= 60 and x <= 287:
@@ -174,8 +190,7 @@ def animation1():
 def animation2s1():
     gameExit = False
     gameDisplay = pygame.display.set_mode((800, 600))   
-    gameDisplay.fill((0, 0, 0))
-    gameDisplay.blit(animation2s1Bg, (0, 0)) # Sets background image
+    gameDisplay.blit(animation2s1Bg, (0, 0)) # Set background image
     pygame.display.update()
     clock.tick(60)
     
@@ -185,6 +200,7 @@ def animation2s1():
             x = clickPos[0]
             y = clickPos[1]
             
+            # Check if where the user clicked is in the range of a button
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 483 and y <= 554:
                     if x >= 60 and x <= 287:
@@ -196,8 +212,7 @@ def animation2s1():
 def animation2s2():
     gameExit = False
     gameDisplay = pygame.display.set_mode((800, 600))   
-    gameDisplay.fill((0, 0, 0))
-    gameDisplay.blit(animation2s2Bg, (0, 0)) # Sets background image
+    gameDisplay.blit(animation2s2Bg, (0, 0)) # Set background image
     pygame.display.update()
     clock.tick(60)
     
@@ -207,6 +222,7 @@ def animation2s2():
             x = clickPos[0]
             y = clickPos[1]   
             
+            # Check if where the user clicked is in the range of a button
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 483 and y <= 554:
                     if x >= 60 and x <= 287:
@@ -218,8 +234,7 @@ def animation2s2():
 def animation21():
     gameExit = False
     gameDisplay = pygame.display.set_mode((800, 600))   
-    gameDisplay.fill((0, 0, 0))
-    gameDisplay.blit(animation21Bg, (0, 0)) # Sets background image
+    gameDisplay.blit(animation21Bg, (0, 0)) # Set background image
     pygame.display.update()
     clock.tick(60)
     
@@ -229,6 +244,7 @@ def animation21():
             x = clickPos[0]
             y = clickPos[1]
             
+            # Check if where the user clicked is in the range of a button
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 483 and y <= 554:
                     if x >= 60 and x <= 287:
@@ -240,8 +256,7 @@ def animation21():
 def animation3():
     gameExit = False
     gameDisplay = pygame.display.set_mode((800, 600))   
-    gameDisplay.fill((0, 0, 0))
-    gameDisplay.blit(animation3Bg, (0, 0)) # Sets background image
+    gameDisplay.blit(animation3Bg, (0, 0)) # Set background image
     pygame.display.update()
     clock.tick(60)   
     
@@ -251,6 +266,7 @@ def animation3():
             x = clickPos[0]
             y = clickPos[1]
             
+            # Check if where the user clicked is in the range of a button
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 483 and y <= 554:
                     if x >= 60 and x <= 287:
@@ -262,8 +278,7 @@ def animation3():
 def animation4():
     gameExit = False
     gameDisplay = pygame.display.set_mode((800, 600))   
-    gameDisplay.fill((0, 0, 0))
-    gameDisplay.blit(animation4Bg, (0, 0)) # Sets background image
+    gameDisplay.blit(animation4Bg, (0, 0)) # Set background image
     pygame.display.update()
     clock.tick(60)
     
@@ -273,6 +288,7 @@ def animation4():
             x = clickPos[0]
             y = clickPos[1]
             
+            # Check if where the user clicked is in the range of a button
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 483 and y <= 554:
                     if x >= 60 and x <= 287:
@@ -284,8 +300,7 @@ def animation4():
 def animation5():
     gameExit = False
     gameDisplay = pygame.display.set_mode((800, 600))   
-    gameDisplay.fill((0, 0, 0))
-    gameDisplay.blit(animation5Bg, (0, 0)) # Sets background image
+    gameDisplay.blit(animation5Bg, (0, 0)) # Set background image
     pygame.display.update()
     clock.tick(60)     
     
@@ -295,6 +310,7 @@ def animation5():
             x = clickPos[0]
             y = clickPos[1]
             
+            # Check if where the user clicked is in the range of a button
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 483 and y <= 554:
                     if x >= 513 and x <= 740:
@@ -305,8 +321,7 @@ def animation5():
 def ending1():
     gameExit = False
     gameDisplay = pygame.display.set_mode((800, 600))   
-    gameDisplay.fill((0, 0, 0))
-    gameDisplay.blit(animationEnding1Bg, (0, 0)) # Sets background image
+    gameDisplay.blit(animationEnding1Bg, (0, 0)) # Set background image
     pygame.display.update()
     clock.tick(60)  
     
@@ -316,10 +331,11 @@ def ending1():
             x = clickPos[0]
             y = clickPos[1]
             
+            # Check if where the user clicked is in the range of a button
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 483 and y <= 554:
                     if x >= 60 and x <= 287:
-                        gameLoop()
+                        mainMenu()
                     elif x >= 513 and x <= 740:
                         pygame.quit()
                         quit()    
@@ -328,8 +344,7 @@ def ending1():
 def ending2():
     gameExit = False
     gameDisplay = pygame.display.set_mode((800, 600))   
-    gameDisplay.fill((0, 0, 0))
-    gameDisplay.blit(animationEnding2Bg, (0, 0)) # Sets background image
+    gameDisplay.blit(animationEnding2Bg, (0, 0)) # Set background image
     pygame.display.update()
     clock.tick(60)   
     
@@ -339,10 +354,11 @@ def ending2():
             x = clickPos[0]
             y = clickPos[1]
             
+            # Check if where the user clicked is in the range of a button
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 483 and y <= 554:
                     if x >= 60 and x <= 287:
-                        gameLoop()
+                        mainMenu()
                     elif x >= 513 and x <= 740:
                         pygame.quit()
                         quit()
@@ -351,8 +367,7 @@ def ending2():
 def ending3():
     gameExit = False
     gameDisplay = pygame.display.set_mode((800, 600))   
-    gameDisplay.fill((0, 0, 0))
-    gameDisplay.blit(animationEnding3Bg, (0, 0)) # Sets background image
+    gameDisplay.blit(animationEnding3Bg, (0, 0)) # Set background image
     pygame.display.update()
     clock.tick(60)
     
@@ -362,10 +377,11 @@ def ending3():
             x = clickPos[0]
             y = clickPos[1]
             
+            # Check if where the user clicked is in the range of a button
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 483 and y <= 554:
                     if x >= 60 and x <= 287:
-                        gameLoop()
+                        mainMenu()
                     elif x >= 513 and x <= 740:
                         pygame.quit()
                         quit()
@@ -374,8 +390,7 @@ def ending3():
 def ending4():
     gameExit = False
     gameDisplay = pygame.display.set_mode((800, 600))   
-    gameDisplay.fill((0, 0, 0))
-    gameDisplay.blit(animationEnding4Bg, (0, 0)) # Sets background image
+    gameDisplay.blit(animationEnding4Bg, (0, 0)) # Set background image
     pygame.display.update()
     clock.tick(60)
     
@@ -385,10 +400,11 @@ def ending4():
             x = clickPos[0]
             y = clickPos[1]
             
+            # Check if where the user clicked is in the range of a button
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 483 and y <= 554:
                     if x >= 60 and x <= 287:
-                        gameLoop()
+                        mainMenu()
                     elif x >= 513 and x <= 740:
                         pygame.quit()
                         quit()        
@@ -397,8 +413,7 @@ def ending4():
 def ending5():
     gameExit = False
     gameDisplay = pygame.display.set_mode((800, 600))   
-    gameDisplay.fill((0, 0, 0))
-    gameDisplay.blit(animationEnding5Bg, (0, 0)) # Sets background image
+    gameDisplay.blit(animationEnding5Bg, (0, 0)) # Set background image
     pygame.display.update()
     clock.tick(60)    
     
@@ -408,10 +423,11 @@ def ending5():
             x = clickPos[0]
             y = clickPos[1]
             
+            # Check if where the user clicked is in the range of a button
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 483 and y <= 554:
                     if x >= 60 and x <= 287:
-                        gameLoop()
+                        mainMenu()
                     elif x >= 513 and x <= 740:
                         pygame.quit()
                         quit()    
@@ -420,8 +436,7 @@ def ending5():
 def instructions():
     gameExit = False
     gameDisplay = pygame.display.set_mode((800, 600))   
-    gameDisplay.fill((0, 0, 0))
-    gameDisplay.blit(instructionsBg, (0, 0)) # Sets background image
+    gameDisplay.blit(instructionsBg, (0, 0)) # Set background image
     pygame.display.update()
     clock.tick(60)  
     
@@ -431,17 +446,17 @@ def instructions():
             x = clickPos[0]
             y = clickPos[1]    
             
+            # Check if where the user clicked is in the range of a button
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 477 and y <= 548:
                     if x >= 48 and x <= 275:
-                        gameLoop()    
+                        mainMenu()    
 
 # Function for the lesson                
 def lesson():
     gameExit = False
     gameDisplay = pygame.display.set_mode((800, 600))   
-    gameDisplay.fill((0, 0, 0))
-    gameDisplay.blit(lesson1Bg, (0, 0)) # Sets background image
+    gameDisplay.blit(lesson1Bg, (0, 0)) # Set background image
     pygame.display.update()
     clock.tick(60)
     
@@ -451,10 +466,11 @@ def lesson():
             x = clickPos[0]
             y = clickPos[1]    
             
+            # Check if where the user clicked is in the range of a button
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 477 and y <= 548:
                     if x >= 48 and x <= 275:
-                        gameLoop()
+                        mainMenu()
                     elif x >= 524 and x <= 751:
                         lesson2()
 
@@ -462,8 +478,7 @@ def lesson():
 def lesson2():
     gameExit = False 
     gameDisplay = pygame.display.set_mode((800, 600))   
-    gameDisplay.fill((0, 0, 0))
-    gameDisplay.blit(lesson2Bg, (0, 0)) # Sets background image
+    gameDisplay.blit(lesson2Bg, (0, 0)) # Set background image
     pygame.display.update()
     clock.tick(60) 
     
@@ -473,6 +488,7 @@ def lesson2():
             x = clickPos[0]
             y = clickPos[1]
             
+            # Check if where the user clicked is in the range of a button
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 477 and y <= 548:
                     if x >= 48 and x <= 275:
@@ -484,8 +500,7 @@ def lesson2():
 def citations1():
     gameExit = False 
     gameDisplay = pygame.display.set_mode((800, 600))   
-    gameDisplay.fill((0, 0, 0))
-    gameDisplay.blit(citations1Bg, (0, 0)) # Sets background image
+    gameDisplay.blit(citations1Bg, (0, 0)) # Set background image
     pygame.display.update()
     clock.tick(60)
     
@@ -495,6 +510,7 @@ def citations1():
             x = clickPos[0]
             y = clickPos[1]
             
+            # Check if where the user clicked is in the range of a button
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 477 and y <= 548:
                     if x >= 48 and x <= 275:
@@ -506,17 +522,17 @@ def citations1():
 def citations2():
     gameExit = False 
     gameDisplay = pygame.display.set_mode((800, 600))   
-    gameDisplay.fill((0, 0, 0))
-    gameDisplay.blit(citations2Bg, (0, 0)) # Sets background image
+    gameDisplay.blit(citations2Bg, (0, 0)) # Set background image
     pygame.display.update()
     clock.tick(60)
-    
+
     while not gameExit:
         for ev in pygame.event.get():
             clickPos = pygame.mouse.get_pos()
             x = clickPos[0]
             y = clickPos[1]
             
+            # Check if where the user clicked is in the range of a button
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 477 and y <= 548:
                     if x >= 48 and x <= 275:
@@ -528,8 +544,7 @@ def citations2():
 def citations3():
     gameExit = False 
     gameDisplay = pygame.display.set_mode((800, 600))   
-    gameDisplay.fill((0, 0, 0))
-    gameDisplay.blit(citations3Bg, (0, 0)) # Sets background image
+    gameDisplay.blit(citations3Bg, (0, 0)) # Set background image
     pygame.display.update()
     clock.tick(60)
     
@@ -539,6 +554,7 @@ def citations3():
             x = clickPos[0]
             y = clickPos[1]
             
+            # Check if where the user clicked is in the range of a button
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 477 and y <= 548:
                     if x >= 48 and x <= 275:
@@ -550,8 +566,7 @@ def citations3():
 def citations4():
     gameExit = False 
     gameDisplay = pygame.display.set_mode((800, 600))   
-    gameDisplay.fill((0, 0, 0))
-    gameDisplay.blit(citations4Bg, (0, 0)) # Sets background image
+    gameDisplay.blit(citations4Bg, (0, 0)) # Set background image
     pygame.display.update()
     clock.tick(60)
     
@@ -561,10 +576,11 @@ def citations4():
             x = clickPos[0]
             y = clickPos[1]
             
+            # Check if where the user clicked is in the range of a button
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 477 and y <= 548:
                     if x >= 48 and x <= 275:
                         citations3()
 
-# Start game loop
-gameLoop()
+# Display the title screen when the program runs
+titleScreen()
