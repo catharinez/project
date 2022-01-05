@@ -4,7 +4,7 @@
 
 # Date: December 11, 2021
 
-# Last modified: January 4, 2022 4:27 pm by Catharine
+# Last modified: January 4, 2022 9:47 pm by Catharine
 
 # Name: Python Project (Wildlife Survival Guide)
 
@@ -140,7 +140,6 @@ def mainMenu():
                     if y >= 264 and y <= 336:
                         lesson()
                     elif y >= 378 and y <= 449:
-                        pygame.quit() 
                         quit()
 
 # Function for the animation                
@@ -337,7 +336,6 @@ def ending1():
                     if x >= 60 and x <= 287:
                         mainMenu()
                     elif x >= 513 and x <= 740:
-                        pygame.quit()
                         quit()    
 
 # Function for ending 2 of the animation                            
@@ -360,7 +358,6 @@ def ending2():
                     if x >= 60 and x <= 287:
                         mainMenu()
                     elif x >= 513 and x <= 740:
-                        pygame.quit()
                         quit()
 
 # Function for ending 3 of the animation                            
@@ -383,7 +380,6 @@ def ending3():
                     if x >= 60 and x <= 287:
                         mainMenu()
                     elif x >= 513 and x <= 740:
-                        pygame.quit()
                         quit()
 
 # Function for ending 4 of the animation                            
@@ -406,7 +402,6 @@ def ending4():
                     if x >= 60 and x <= 287:
                         mainMenu()
                     elif x >= 513 and x <= 740:
-                        pygame.quit()
                         quit()        
 
 # Function for ending 5 of the animation                            
@@ -429,7 +424,6 @@ def ending5():
                     if x >= 60 and x <= 287:
                         mainMenu()
                     elif x >= 513 and x <= 740:
-                        pygame.quit()
                         quit()    
                             
 # Function for the instructions
