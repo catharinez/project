@@ -4,7 +4,7 @@
 
 # Date: December 11, 2021
 
-# Last modified: January 4, 2022 9:47 pm by Catharine
+# Last modified: January 6, 2022 3:50 pm by Catharine
 
 # Name: Python Project (Wildlife Survival Guide)
 
@@ -93,7 +93,11 @@ def titleScreen():
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if x >= 524 and x <= 751:
                     if y >= 477 and y <= 548:
-                        mainMenu()                
+                        mainMenu()  
+                        
+            if ev.type == pygame.QUIT:
+                gameExit = True
+                pygame.quit()
 
 # Function for the main menu
 def mainMenu():
@@ -141,6 +145,10 @@ def mainMenu():
                         lesson()
                     elif y >= 378 and y <= 449:
                         quit()
+                        
+            if ev.type == pygame.QUIT:
+                gameExit = True
+                pygame.quit()            
 
 # Function for the animation                
 def animation():
@@ -162,6 +170,10 @@ def animation():
                 if y >= 505 and y <= 575:
                     if x >= 547 and x <= 773:
                         animation1()
+                        
+            if ev.type == pygame.QUIT:
+                gameExit = True
+                pygame.quit()              
 
 # Function for Part 1 of the animation                        
 def animation1():
@@ -184,6 +196,10 @@ def animation1():
                         animation2s1()
                     elif x >= 513 and x <= 740:
                         animation2s2()
+                        
+            if ev.type == pygame.QUIT:
+                gameExit = True
+                pygame.quit()                      
 
 # Function for part 2 scenario 1 of the animation                            
 def animation2s1():
@@ -206,6 +222,10 @@ def animation2s1():
                         animation3()
                     elif x >= 513 and x <= 740:
                         ending1()                
+                        
+            if ev.type == pygame.QUIT:
+                gameExit = True
+                pygame.quit()                  
 
 # Function for part 2 scenario 2 of the animation    
 def animation2s2():
@@ -228,6 +248,10 @@ def animation2s2():
                         ending2()
                     elif x >= 513 and x <= 740:  
                         animation21()
+                        
+            if ev.type == pygame.QUIT:
+                gameExit = True
+                pygame.quit()                  
                             
 # Function for part 2.1 of the animation
 def animation21():
@@ -249,7 +273,11 @@ def animation21():
                     if x >= 60 and x <= 287:
                         animation3()
                     elif x >= 513 and x <= 740:
-                        ending1()      
+                        ending1()   
+                        
+            if ev.type == pygame.QUIT:
+                gameExit = True
+                pygame.quit()                      
     
 # Function for part 3 of the animation
 def animation3():
@@ -271,7 +299,11 @@ def animation3():
                     if x >= 60 and x <= 287:
                         ending3() 
                     elif x >= 513 and x <= 740:
-                        animation4()                            
+                        animation4() 
+                        
+            if ev.type == pygame.QUIT:
+                gameExit = True
+                pygame.quit()                  
 
 # Function for part 4 of the animation                            
 def animation4():
@@ -293,7 +325,11 @@ def animation4():
                     if x >= 60 and x <= 287:
                         ending4()
                     elif x >= 513 and x <= 740:
-                        animation5()                            
+                        animation5()    
+                        
+            if ev.type == pygame.QUIT:
+                gameExit = True
+                pygame.quit()                      
                             
 # Function for part 5 of the animation
 def animation5():
@@ -315,6 +351,9 @@ def animation5():
                     if x >= 513 and x <= 740:
                         ending5()    
     
+            if ev.type == pygame.QUIT:
+                gameExit = True
+                pygame.quit()          
 
 # Function for ending 1 of the animation
 def ending1():
@@ -336,7 +375,11 @@ def ending1():
                     if x >= 60 and x <= 287:
                         mainMenu()
                     elif x >= 513 and x <= 740:
-                        quit()    
+                        quit() 
+                        
+            if ev.type == pygame.QUIT:
+                gameExit = True
+                pygame.quit()                              
 
 # Function for ending 2 of the animation                            
 def ending2():
@@ -359,6 +402,10 @@ def ending2():
                         mainMenu()
                     elif x >= 513 and x <= 740:
                         quit()
+                        
+            if ev.type == pygame.QUIT:
+                gameExit = True
+                pygame.quit()                              
 
 # Function for ending 3 of the animation                            
 def ending3():
@@ -381,6 +428,10 @@ def ending3():
                         mainMenu()
                     elif x >= 513 and x <= 740:
                         quit()
+                        
+            if ev.type == pygame.QUIT:
+                gameExit = True
+                pygame.quit()                              
 
 # Function for ending 4 of the animation                            
 def ending4():
@@ -403,6 +454,10 @@ def ending4():
                         mainMenu()
                     elif x >= 513 and x <= 740:
                         quit()        
+                        
+            if ev.type == pygame.QUIT:
+                gameExit = True
+                pygame.quit()              
 
 # Function for ending 5 of the animation                            
 def ending5():
@@ -424,7 +479,11 @@ def ending5():
                     if x >= 60 and x <= 287:
                         mainMenu()
                     elif x >= 513 and x <= 740:
-                        quit()    
+                        quit() 
+                        
+            if ev.type == pygame.QUIT:
+                gameExit = True
+                pygame.quit()                            
                             
 # Function for the instructions
 def instructions():
@@ -445,6 +504,10 @@ def instructions():
                 if y >= 477 and y <= 548:
                     if x >= 48 and x <= 275:
                         mainMenu()    
+                        
+            if ev.type == pygame.QUIT:
+                gameExit = True
+                pygame.quit()                                                    
 
 # Function for the lesson                
 def lesson():
@@ -467,6 +530,10 @@ def lesson():
                         mainMenu()
                     elif x >= 524 and x <= 751:
                         lesson2()
+                        
+            if ev.type == pygame.QUIT:
+                gameExit = True
+                pygame.quit()               
 
 # Function for the second part of the lesson                            
 def lesson2():
@@ -489,6 +556,10 @@ def lesson2():
                         lesson()
                     elif x >= 524 and x <= 751:
                         citations1()
+                        
+            if ev.type == pygame.QUIT:
+                gameExit = True
+                pygame.quit()              
 
 # Function for the first part of the citations                            
 def citations1():
@@ -510,7 +581,12 @@ def citations1():
                     if x >= 48 and x <= 275:
                         lesson2()
                     elif x >= 524 and x <= 751:
-                        citations2()    
+                        citations2() 
+                        
+            if ev.type == pygame.QUIT:
+                gameExit = True
+                pygame.quit()              
+                        
 
 # Function for the second part of the citations                            
 def citations2():
@@ -533,6 +609,10 @@ def citations2():
                         citations1()
                     elif x >= 524 and x <= 751:
                         citations3()  
+                        
+            if ev.type == pygame.QUIT:
+                gameExit = True
+                pygame.quit()                                  
 
 # Function for the third part of the citations
 def citations3():
@@ -555,6 +635,10 @@ def citations3():
                         citations2()
                     elif x >= 524 and x <= 751:
                         citations4()  
+                        
+            if ev.type == pygame.QUIT:
+                gameExit = True
+                pygame.quit()                         
 
 # Function for the fourth part of the citations                            
 def citations4():
@@ -575,6 +659,10 @@ def citations4():
                 if y >= 477 and y <= 548:
                     if x >= 48 and x <= 275:
                         citations3()
+                        
+            if ev.type == pygame.QUIT:
+                gameExit = True
+                pygame.quit()            
 
 # Display the title screen when the program runs
 titleScreen()
