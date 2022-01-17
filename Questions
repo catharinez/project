@@ -5,277 +5,239 @@
 # Name: Python Project (Wildlife Survival Guide)
 # Description: Pygame project which teaches a lesson about the wildlife survival lesson
 # *************************************************
-# import module
+import pygame
+import pygame.gfxdraw
 import time
-import turtle
+myfont = pygame.font.SysFont("monospace", 15)
+label = myfont.render
 
-# create virtual screen
-screen = turtle.Screen ()
-screen.setup (1000, 600)
-screen.colormode (225)
-screen.bgcolor("navy")
-screen.title ("Wildlife Survival Lessson!")
+pygame.init()
+pygame.mixer.init()
+hit = pygame.mixer.Sound("music.wav")
+screen = pygame.display.set_mode((1000, 800))
+clock = pygame.time.Clock()
 
-# create multiple choice boxes
-# create box c
-turtle.speed (0)
-turtle.hideturtle ()
-turtle.penup ()
-turtle.goto (-450, -250)
-turtle.pendown ()
-turtle.begin_fill ()
-turtle.setheading (0)
-turtle.color ("grey")
-for sides in range (2):
-    turtle.fd (425)
-    turtle.left (90)
-    turtle.fd (125)
-    turtle.left (90)
-turtle.end_fill ()
+buttons = pygame.sprite.Group()
+class Button(pygame.sprite.Sprite):
+    def __init__(self, position, text, size,
+        colors="lightgreen on green",
+        hover_colors="darkgreen on green",
+        style="buttona",
+        borderc=(255,255,255),
+        command=lambda: print("No command is being activated for this button")):
 
-# create box d
-turtle.penup ()
-turtle.goto (25, -250)
-turtle.pendown ()
-turtle.begin_fill ()
-turtle.setheading (0)
-for sides in range (2):
-    turtle.fd (425)
-    turtle.left (90)
-    turtle.fd (125)
-    turtle.left (90)
-turtle.end_fill ()
+        # the hover_colors attribute needs to be fixed
+        super().__init__()
+        global num
 
-# create box a
-turtle.penup ()
-turtle.goto (-450, -75)
-turtle.pendown ()
-turtle.begin_fill ()
-turtle.setheading (0)
-for sides in range (2):
-    turtle.fd (425)
-    turtle.left (90)
-    turtle.fd (125)
-    turtle.left (90)
-turtle.end_fill ()
+        self.text = text
+        self.command = command
 
-# create box b
-turtle.penup()
-turtle.goto (25, -75)
-turtle.pendown ()
-turtle.begin_fill ()
-turtle.setheading (0)
-for sides in range (2):
-    turtle.fd (425)
-    turtle.left (90)
-    turtle.fd (125)
-    turtle.left (90)
-turtle.end_fill ()
+        # create the colors 
+        self.colors = colors
+        self.original_colors = colors
+        self.fg, self.bg = self.colors.split("start")
 
-# create question box
-turtle.penup ()
-turtle.goto (-450, 100)
-turtle.pendown ()
-turtle.begin_fill ()
-turtle.setheading (0)
-for sides in range (2):
-    turtle.fd (625)
-    turtle.left (90)
-    turtle.fd (150)
-    turtle.left (90)
-turtle.end_fill ()
+        # hover_colors
+        if hover_colors == "darkgreen on green":
+            self.hover_colors = f"{self.bg} on {self.fg}"
+        else:
+            self.hover_colors = hover_colors
 
-# create answer box
-turtle.penup ()
-turtle.goto (225, 100)
-turtle.pendown ()
-turtle.begin_fill ()
-turtle.setheading (0)
-for sides in range (2):
-    turtle.fd (225)
-    turtle.left (90)
-    turtle.fd (150)
-    turtle.left (90)
-turtle.end_fill ()
+        # styles can be buttona or buttonb
+        self.style = style
+        self.borderc = borderc
+        # font
+        self.font = pygame.font.SysFont("monospace", size)
+        self.render(self.text)
+        self.x, self.y, self.w , self.h = self.text_render.get_rect()
+        self.x, self.y = position
+        self.rect = pygame.Rect(self.x, self.y, 500, self.h)
+        self.position = position
+        self.pressed = 1
 
-# initialize questions
-question = turtle.Turtle ()
-question.speed (0)
-question.hideturtle ()
-question.penup ()
-question.goto (-425, 150)
+        # create the group with all the buttons
+        buttons.add(self)
 
-# initialize answers
-answers = turtle.Turtle ()
-answers.speed (0)
-answers.hideturtle ()
-answers.penup ()
-answers.goto (250, 125)
+    def render(self, text):
+        #create surface
+        self.text_render = self.font.render(text, 1, self.fg)
 
-# create answer boxes for each choice box
-# box a answers
-a = turtle.Turtle ()
-a.speed (0)
-a.hideturtle ()
-a.penup ()
-a.goto (-425, -50)
+        # create the surface in the image attributes
+        self.image = self.text_render
 
-# box b answers
-b = turtle.Turtle ()
-b.speed (0)
-b.hideturtle ()
-b.penup ()
-b.goto (50, -50)
+    def update(self):
+        self.fg, self.bg = self.colors.split("start")
+        if self.style == "buttona":
+            self.draw_buttona()
+        elif self.style == "buttonb":
+            self.draw_buttonb()
+        if self.command != None:
+            self.hover()
+            self.click()
 
-# box c answers
-c = turtle.Turtle ()
-c.speed (0)
-c.hideturtle ()
-c.penup ()
-c.goto (-425, -225)
+    def draw_buttona(self):
+        # horizontal up
+        lcolor = (150, 150, 150)
+        lcolor2 = (50, 50, 50)
+        pygame.draw.line(screen, lcolor, self.position,
+            (self.x + self.w , self.y), 5)
+        pygame.draw.line(screen, lcolor, (self.x, self.y - 2),
+            (self.x, self.y + self.h), 5)
+        # horizontal down
+        pygame.draw.line(screen, lcolor2, (self.x, self.y + self.h),
+            (self.x + self.w , self.y + self.h), 5)
+        pygame.draw.line(screen, lcolor2, (self.x + self.w , self.y + self.h),
+            [self.x + self.w , self.y], 5)
+        # background of the button
+        pygame.draw.rect(screen, self.bg, self.rect)  
 
-# box d answers
-d = turtle.Turtle ()
-d.speed (0)
-d.hideturtle ()
-d.penup ()
-d.goto (50, -225)
+    def draw_buttonb(self):
+        pygame.draw.rect(screen, self.bg, (self.x - 50, self.y, 500 , self.h))
+        pygame.gfxdraw.rectangle(screen, (self.x - 50, self.y, 500 , self.h), self.borderc)
 
-# create quiz intro
-question.write("Welcome to our quiz for the Wildlife Survival Lesson.", font=("Verdana", 43))
-time.sleep(2)
-question.clear()
+    def check_collision(self):
+        if self.rect.collidepoint(pygame.mouse.get_pos()):
+            self.colors = self.hover_colors
+        else:
+            self.colors = self.original_colors
 
-question.write("Please type on the multiple choice boxes (a, b, c or d) to answer each question.", font=("Verdana", 23))
-time.sleep(2)
-question.clear()
+    def hover(self):
+        self.check_collision()
 
-question.write("Have fun and enjoy the quiz.", font=("Verdana", 23))
-time.sleep(2)
-question.clear()
+    def click(self):
+        if self.rect.collidepoint(pygame.mouse.get_pos()):
+            if pygame.mouse.get_pressed()[0] and self.pressed == 1:
+                print("The answer is:'" + self.text + "'")
+                self.command()
+                self.pressed = 0
 
-# number of correct answers
-correct = int(0)
-answers.write("{}".format(correct), font=("Verdana", 62,))
+            if pygame.mouse.get_pressed() == (0,0,0):
+                self.pressed = 1
 
-# initialize variable
-choice = 1
+def on_click():
+    print("Click on the correct answer")
 
-# create a key function for each choice box
-def choose_answer_a():
-    global select
-    select = 'a'
-    evaluate ()
+def on_right():
+    check_score("right")
 
-def choose_answer_b():
-    global select
-    select = 'b'
-    evaluate ()
+def on_false():
+   check_score()
 
-def choose_answer_c():
-    global select
-    select = 'c'
-    evaluate ()
+def check_score(answered="wrong"):
+    global qnum, points
 
-def choose_answer_d():
-    global select
-    select = 'd'
-    evaluate ()
+    hit.play() # click sound
+    if qnum < len(questions):
+        print(qnum, len(questions))
+        if answered == "right":
+            time.sleep(.1)
+            points += 1
 
-# create functions for choice boxes
-def evaluate():
-    global correct
-    global choice
-    if correct == select:
-        question.clear()
-        question.write("Correct", font=("Verdana", 23))
-        time.sleep(1.2)
-        answers.clear()
-        correct += 1
-        answers.write("{}".format(correct), font=("Verdana", 62))
-    else:
-        question.clear()
-        question.write("Wrong! The answer was {}".format(correct), font=("Verdana", 23))
-        time.sleep(1.2)
-        question.clear()
-    choice += 1
-    clearscreen ()
-    next_question ()
+            # Show the score text
+        qnum += 1 # counter for next question in the list
+        score.change_text(str(points))
+        # Change the text of the question
+        title.change_text(questions[qnum-1][0], color="greem")
+        # change the question number
+        num_question.change_text(str(qnum))
+        show_question(qnum)
+        
 
-def next_question ():
-    if choice == 2:
-      question_two ()
-    if choice == 3:
-      question_three ()
-    if choice == 4:
-      question_four ()
-    if choice == 5:
-      question_five ()
+    # for the last question...
+    elif qnum == len(questions):
+        print(qnum, len(questions))
+        if answered == "right":
+            kill()
+            time.sleep(.1)
+            points +=1
+        score.change_text("You reached a score of " + str(points))
+    time.sleep(.5)
 
-def clearscreen ():
-    question.clear ()
-    a.clear ()
-    b.clear ()
-    c.clear ()
-    d.clear ()
 
-# create functions for each question
-def question_one ():
-    question.write("Eating raw meat can possibly cause all of the following poisonings except:", font=("Verdana", 23))
-    a.write ("a. Lead", font=("Verdana", 23))
-    b.write ("b. E.coli", font=("Verdana", 23))
-    c.write ("c. Salmonella", font=("Verdana", 23))
-    d.write ("d. Scomboid", font=("Verdana", 23))
-    global correct
-    correct = 'a'
 
-def question_two ():
-    question.write("What is the first step in order to build a fire?", font=("Verdana", 23))
-    a.write("a. Place logs in a cross structure.", font=("Verdana", 23))
-    b.write("b. If matches are available, use a match to start a fire. Otherwise, rub sticks together to start a fire.",
-        font=("Verdana", 23))
-    c.write("c. Clear a circular area and surround it using large rocks.", font=("Verdana", 23))
-    d.write("d. Use twigs and leaves as natural kindling.", font=("Verdana", 23))
-    global correct
-    correct = 'a'
 
-def question_three():
-    question.write(
-        "Which of the following should you not do when trying to signal a helicopter?",
-        font=("Verdana", 23))
-    a.write("a. Make a “Y” shaped arm gesture.", font=("Verdana", 23))
-    b.write("b. Yell for help", font=("Verdana", 23))
-    c.write("c. Start a fire", font=("Verdana", 23))
-    d.write("d. Waver your arms in a crossed position above your head.", font=("Verdana", 23))
-    global correct
-    correct = 'b'
+questions = [
+    ["Question 1: Eating raw meat can possibly cause all of the following poisonings except:", ["Lead", "E.coli", "Salmonella", "Scombroid"]],
+    ["Question 2: What is the first step in order to build a fire?", ["Place logs in a cross structure", "If matches are available, use a match to start a fire. Otherwise, rub sticks together to start a fire", "Clear a circular area and surround it using large rocks", "Use twigs and leaves as natural kindling"]],
+    ["Question 3: Which of the following should you not do when trying to signal a helicopter?", ["Make a “Y” shaped arm gesture", "Yell for help", "Start a fire", "Wave your arms in a crossed position above your head"]],
+    ["Question 4: When you are hungry in an unknown place, the best thing to do is:", ["Eat nothing", "Drink water", "Find berries", "Hunt and eat raw meat"]],
+    ["Question 5: From the interactive story, what was the first thing you did?", ["Find food", "Find shelter", "Find humans", "Find water"]],
+]
 
-def question_four():
-    question.write(
-        "When you are hungry in an unknown place, the best thing to do is:",
-        font=("Verdana", 23))
-    a.write("a. Eat nothing.", font=("Verdana", 23))
-    b.write("b. Drink water.", font=("Verdana", 23))
-    c.write("c. Find berries.", font=("Verdana", 23))
-    d.write("d. Hunt and eat raw meat.", font=("Verdana", 23))
-    global correct
-    correct = 'c'
 
-def question_five ():
-    question.write("From the interactive story, what was the first thing you did?",font=("Verdana", 23))
-    a.write("a. Find food.", font=("Verdana", 23))
-    b.write("b. Find shelter.", font=("Verdana", 23))
-    c.write("c. Find humans.", font=("Verdana", 23))
-    d.write("d. Find water.", font=("Verdana", 23))
-    global correct
-    correct = 'c'
 
-# create key bindings
-screen.listen()
-screen.onkeypress(choose_answer_a, "a")
-screen.onkeypress(choose_answer_b, "b")
-screen.onkeypress(choose_answer_c, "c")
-screen.onkeypress(choose_answer_d, "d")
 
-# output
-question_one ()
+def show_question(qnum):
+    # Kills the previous buttons/sprites
+    kill()
+
+    
+    # The 4 position of the buttons
+    pos = [100, 150, 200, 250]
+
+    Button((10, 100), "a. ", 36, "lightgreen on green",
+        hover_colors="darkgreen on green", style="buttonb", borderc=(255,255,0),
+        command=None)
+    Button((10, 150), "b. ", 36, "lightgreen on green",
+        hover_colors="darkgreen on green", style="buttonb", borderc=(255,255,0),
+        command=None)
+    Button((10, 200), "c. ", 36, "lightgreen on green",
+        hover_colors="darkgreen on green", style="buttonb", borderc=(255,255,0),
+        command=None)
+    Button((10, 250), "d. ", 36, "lightgreen on green",
+        hover_colors="darkgreen on green", style="buttonb", borderc=(255,255,0),
+        command=None)
+
+    Button((50, pos[0]), questions[qnum-1][1][0], 36, "lightgreen on green",
+        hover_colors="darkgreen on green", style="buttonb", borderc=(255,255,0),
+        command=on_right)
+    Button((50, pos[1]), questions[qnum-1][1][1], 36, "lightgreen on green",
+        hover_colors="darkgreen on green", style="buttonb", borderc=(255,255,0),
+        command=on_false)
+    Button((50, pos[2]), questions[qnum-1][1][2], 36, "lightgreen on green",
+        hover_colors="darkgreen on green", style="buttonb", borderc=(255,255,0),
+        command=on_false)
+    Button((50, pos[3]), questions[qnum-1][1][3], 36, "lightgreen on green",
+        hover_colors="darkgreen on green", style="buttonb", borderc=(255,255,0),
+        command=on_false)
+
+
+def kill():
+    for _ in buttons:
+        _.kill()
+
+qnum = 1
+points = 0
+# ================= SOME LABELS ==========================
+num_question = label(screen, str(qnum), 0, 0)
+score = label(screen, "monospace", 50, 300)
+title = label(screen, questions[qnum-1][0], 10, 10, 55, color="green")
+write1 = label(screen, "Wildlife Survival Quiz", 50, 350, 20, color="darkgreen")
+
+def start_again():
+    pass
+
+def loop():
+    global game_on
+
+    show_question(qnum)
+
+    while True:
+        screen.fill(0)
+        for event in pygame.event.get():
+            if (event.type == pygame.QUIT):
+                pygame.quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    pygame.quit()
+        buttons.update() #                     update buttons
+        buttons.draw(screen)
+        clock.tick(60)
+        pygame.display.update()
+    pygame.quit()
+
+if __name__ == '__main__':
+    pygame.init()
+    game_on = 1
+    loop()
