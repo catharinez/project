@@ -4,16 +4,13 @@
 # Last modified: January 1, 2022 2:00 am by Noshin
 # Name: Python Project (Wildlife Survival Guide)
 # Description: Pygame project which teaches a lesson about the wildlife survival lesson
-# *************************************************
-import pygame
+# **********************************************import pygame
 import pygame.gfxdraw
 import time
-myfont = pygame.font.SysFont("monospace", 15)
-label = myfont.render
 
 pygame.init()
 pygame.mixer.init()
-hit = pygame.mixer.Sound("music.wav")
+hit = pygame.mixer.Sound("dynamite.wav")
 screen = pygame.display.set_mode((1000, 800))
 clock = pygame.time.Clock()
 
@@ -21,14 +18,9 @@ buttons = pygame.sprite.Group()
 class Button(pygame.sprite.Sprite):
     def __init__(self, position, text, size,
         colors="lightgreen on green",
-        hover_colors="darkgreen on green",
         style="buttona",
         borderc=(255,255,255),
         command=lambda: print("No command is being activated for this button")):
-
-        # the hover_colors attribute needs to be fixed
-        super().__init__()
-        global num
 
         self.text = text
         self.command = command
@@ -38,13 +30,6 @@ class Button(pygame.sprite.Sprite):
         self.original_colors = colors
         self.fg, self.bg = self.colors.split("start")
 
-        # hover_colors
-        if hover_colors == "darkgreen on green":
-            self.hover_colors = f"{self.bg} on {self.fg}"
-        else:
-            self.hover_colors = hover_colors
-
-        # styles can be buttona or buttonb
         self.style = style
         self.borderc = borderc
         # font
@@ -95,12 +80,6 @@ class Button(pygame.sprite.Sprite):
     def draw_buttonb(self):
         pygame.draw.rect(screen, self.bg, (self.x - 50, self.y, 500 , self.h))
         pygame.gfxdraw.rectangle(screen, (self.x - 50, self.y, 500 , self.h), self.borderc)
-
-    def check_collision(self):
-        if self.rect.collidepoint(pygame.mouse.get_pos()):
-            self.colors = self.hover_colors
-        else:
-            self.colors = self.original_colors
 
     def hover(self):
         self.check_collision()
@@ -176,30 +155,26 @@ def show_question(qnum):
     # The 4 position of the buttons
     pos = [100, 150, 200, 250]
 
-    Button((10, 100), "a. ", 36, "lightgreen on green",
-        hover_colors="darkgreen on green", style="buttonb", borderc=(255,255,0),
+    Button((10, 100), "a. ", 36, "lightgreen on green", style="buttonb", borderc=(255,255,0),
         command=None)
-    Button((10, 150), "b. ", 36, "lightgreen on green",
-        hover_colors="darkgreen on green", style="buttonb", borderc=(255,255,0),
+    Button((10, 150), "b. ", 36, "lightgreen on green", style="buttonb", borderc=(255,255,0),
         command=None)
-    Button((10, 200), "c. ", 36, "lightgreen on green",
-        hover_colors="darkgreen on green", style="buttonb", borderc=(255,255,0),
+    Button((10, 200), "c. ", 36, "lightgreen on green", style="buttonb", borderc=(255,255,0),
         command=None)
-    Button((10, 250), "d. ", 36, "lightgreen on green",
-        hover_colors="darkgreen on green", style="buttonb", borderc=(255,255,0),
+    Button((10, 250), "d. ", 36, "lightgreen on green", style="buttonb", borderc=(255,255,0),
         command=None)
 
     Button((50, pos[0]), questions[qnum-1][1][0], 36, "lightgreen on green",
-        hover_colors="darkgreen on green", style="buttonb", borderc=(255,255,0),
+        style="buttonb", borderc=(255,255,0),
         command=on_right)
     Button((50, pos[1]), questions[qnum-1][1][1], 36, "lightgreen on green",
-        hover_colors="darkgreen on green", style="buttonb", borderc=(255,255,0),
+        style="buttonb", borderc=(255,255,0),
         command=on_false)
     Button((50, pos[2]), questions[qnum-1][1][2], 36, "lightgreen on green",
-        hover_colors="darkgreen on green", style="buttonb", borderc=(255,255,0),
+        style="buttonb", borderc=(255,255,0),
         command=on_false)
     Button((50, pos[3]), questions[qnum-1][1][3], 36, "lightgreen on green",
-        hover_colors="darkgreen on green", style="buttonb", borderc=(255,255,0),
+        style="buttonb", borderc=(255,255,0),
         command=on_false)
 
 
@@ -209,11 +184,13 @@ def kill():
 
 qnum = 1
 points = 0
-# ================= SOME LABELS ==========================
-num_question = label(screen, str(qnum), 0, 0)
-score = label(screen, "monospace", 50, 300)
-title = label(screen, questions[qnum-1][0], 10, 10, 55, color="green")
-write1 = label(screen, "Wildlife Survival Quiz", 50, 350, 20, color="darkgreen")
+
+
+num_question = (screen, str(qnum), 0, 0)
+score = (screen, "monospace", 50, 300)
+title = (screen, questions[qnum-1][0], 10, 10, 55, color="lightgreen")
+write1 = (screen, "Wildlife Survival Quiz", 50, 350, 20, color="darkgreen")
+
 
 def start_again():
     pass
@@ -231,7 +208,7 @@ def loop():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
-        buttons.update() #                     update buttons
+        buttons.update() 
         buttons.draw(screen)
         clock.tick(60)
         pygame.display.update()
@@ -239,5 +216,7 @@ def loop():
 
 if __name__ == '__main__':
     pygame.init()
+    game_on = 1
+    loop()
     game_on = 1
     loop()
