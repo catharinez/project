@@ -4,7 +4,7 @@
 
 # Date: December 11, 2021
 
-# Last modified: January 17, 2022 10:08 am by Catharine and Noshin
+# Last modified: January 18, 2022 5:31 pm by Catharine 
 
 # Name: Python Project (Wildlife Survival Guide)
 
@@ -24,6 +24,9 @@ from pygame.locals import *
 # Declare and initialize variables
 clock = pygame.time.Clock()
 numberOfCorrect = int(0)
+numberOfCorrect = 0
+
+# Variables to store the images in
 titleScreenBg = pygame.image.load('images/titlescreenbg.png')
 mainMenuBg = pygame.image.load('images/WildlifeSurvivalBg.png')
 animationBg = pygame.image.load('images/animationscenariobg.png')
@@ -81,7 +84,6 @@ quizResultsButton = pygame.image.load('images/quizresultsbutton.png')
 quizResultsButton = pygame.transform.scale(quizResultsButton, (227, 71))
 exitButton = pygame.image.load('images/exitbutton.png')
 exitButton = pygame.transform.scale(exitButton, (227, 71))
-numberOfCorrect = 0
 
 # Necessary for python to work on tdsb computers
 if platform.system() == 'Windows':
@@ -164,6 +166,7 @@ def mainMenu():
                     if y >= 264 and y <= 336:
                         instructions()
                     elif y >= 378 and y <= 449:
+                        # Quiz results are displayed depending on how many answers are right, the default number of correct answers is 0
                         if numberOfCorrect == 0:
                             quizResults0()
                         elif numberOfCorrect == 1:
@@ -1146,6 +1149,7 @@ def quizQ5Incorrect():
             if ev.type == pygame.MOUSEBUTTONDOWN:
                 if y >= 477 and y <= 548:
                     if x >= 524 and x <= 751:
+                        # Display quiz results after the user finishes the quiz
                         if numberOfCorrect == 0:
                             quizResults0()
                         elif numberOfCorrect == 1:
